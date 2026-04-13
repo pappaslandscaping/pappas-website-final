@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Your Free Lawn Care Quote Cleveland | Pappas & Co. Landscaping</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="description" content="Free lawn care quotes in Cleveland. Get custom pricing for mowing, cleanup, aeration, snow removal. Response in 1 business day. No obligation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="quote.css">
+    <!-- Google reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeNqnQsAAAAAGgwOp8QUnjq6U8HZNoC1tVFTTV3"></script>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G3K6X5HFBW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-G3K6X5HFBW');
+    </script>
+</head>
+<body>
+    <!-- Top Contact Bar -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-left">
+                <a href="tel:4408867318" class="top-bar-link">
+                    <span class="top-bar-icon">📞</span>
+                    <span>(440) 886-7318</span>
+                </a>
+                <span class="top-bar-divider">|</span>
+                <span class="top-bar-text">Call or Text Us</span>
+            </div>
+            <div class="top-bar-right">
+                <span class="top-bar-cta">Ready for a better lawn? Let&#x27;s chat</span>
+                <a href="/cdn-cgi/l/email-protection#29414c4545460f0a1f1d1259485959485a4548474d5a4a485940474e0f0a1d1f124a4644" class="top-bar-link">hello&#64;pappaslandscaping&#46;com</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a class='logo' href='/'>
+                <img src="logo-horizontal.svg" alt="Pappas & Co. Landscaping" class="logo-img">
+            </a>
+            
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href='/'>Home</a></li>
+                <li><a href='/about'>About Us</a></li>
+                <li><a href='/services'>Services</a></li>
+                <li><a href='/reviews'>Reviews</a></li>
+                <li><a href='/blog'>Blog</a></li>
+                <li><a href='/faq'>FAQ</a></li>
+                <li><a href='/contact'>Contact</a></li>
+                <li><a class='cta-nav' href='/quote'>Get a Quote</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Quote Form -->
+    <section class="quote-section">
+        <div class="container">
+            <div class="quote-header">
+                <h1>Get Your Free Quote</h1>
+                <p>Fill out the form below and we'll send you a customized quote within 24 hours</p>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div class="progress-bar">
+                <div class="progress-step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Details</div>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Confirm</div>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Submit</div>
+                </div>
+            </div>
+
+            <!-- Multi-Step Form -->
+            <form id="quoteForm" class="quote-form" novalidate>
+                <!-- Step 1: Contact Info & Services -->
+                <div class="form-step active" data-step="1">
+                    <div class="form-section">
+                        <h2>Contact Information</h2>
+                        <p class="section-subtitle">We'll send your quote to this email</p>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name <span class="required">*</span></label>
+                                <input type="text" id="firstName" name="firstName" autocomplete="given-name" autocapitalize="words" required>
+                                <span class="error-message" id="firstNameError"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lastName">Last Name <span class="required">*</span></label>
+                                <input type="text" id="lastName" name="lastName" autocomplete="family-name" autocapitalize="words" required>
+                                <span class="error-message" id="lastNameError"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone <span class="required">*</span></label>
+                                <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="440-555-1234" required>
+                                <span class="error-message" id="phoneError"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" autocomplete="email" required>
+                                <span class="error-message" id="emailError"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="source">How'd you find us? <span class="required">*</span></label>
+                            <select id="source" name="source" required>
+                                <option value="">Select...</option>
+                                <option value="Google Search">Google Search</option>
+                                <option value="Facebook">Facebook</option>
+                                <option value="Instagram">Instagram</option>
+                                <option value="Friend/Family Referral">Friend/Family Referral</option>
+                                <option value="Nextdoor">Nextdoor</option>
+                                <option value="Yard Sign">Yard Sign</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <span class="error-message" id="sourceError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Service Address <span class="required">*</span></label>
+                            <input type="text" id="address" name="address" autocomplete="off" autocapitalize="words" required placeholder="Enter your service address">
+                            <span class="error-message" id="addressError"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2>Select Your Services</h2>
+                        <p class="section-subtitle">Choose a package or pick individual services</p>
+
+                        <!-- Package Options -->
+                        <div class="packages-grid">
+                            <div class="package-card" data-package="essential">
+                                <div class="package-header">
+                                    <h3>Essential Care</h3>
+                                    <p>Seasonal maintenance essentials</p>
+                                </div>
+                                <ul class="package-features">
+                                    <li>Spring Cleanup</li>
+                                    <li>Fall Cleanup</li>
+                                    <li>Aeration (2x per year)</li>
+                                    <li>Fertilization Program</li>
+                                </ul>
+                                <div class="package-included">
+                                    <strong>INCLUDED</strong>
+                                    <ul>
+                                        <li>Reliable scheduling</li>
+                                        <li>Professional equipment</li>
+                                        <li>Debris removal</li>
+                                        <li>Customer portal access</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="package-card featured" data-package="complete">
+                                <div class="popular-badge">Most Popular</div>
+                                <div class="package-header">
+                                    <h3>Complete Care</h3>
+                                    <p>Year-round lawn maintenance</p>
+                                </div>
+                                <ul class="package-features">
+                                    <li>Weekly Lawn Maintenance</li>
+                                    <li>Spring & Fall Cleanups</li>
+                                    <li>Shrub & Hedge Trimming</li>
+                                    <li>Mulching</li>
+                                    <li>Aeration & Fertilization</li>
+                                </ul>
+                                <div class="package-included">
+                                    <strong>INCLUDED</strong>
+                                    <ul>
+                                        <li>Everything in Essential Care</li>
+                                        <li>Regular maintenance visits</li>
+                                        <li>Property care updates</li>
+                                        <li>Customer portal access</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="package-card" data-package="premium">
+                                <div class="package-header">
+                                    <h3>Premium Care</h3>
+                                    <p>Complete property management</p>
+                                </div>
+                                <ul class="package-features">
+                                    <li>Everything in Complete Care</li>
+                                    <li>Snow Removal (Winter)</li>
+                                </ul>
+                                <div class="package-included">
+                                    <strong>INCLUDED</strong>
+                                    <ul>
+                                        <li>Year-round service</li>
+                                        <li>Winter weather response</li>
+                                        <li>Customer portal access</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="or-divider">
+                            <span>or select individual services</span>
+                        </div>
+
+                        <!-- Individual Services -->
+                        <div class="services-checkboxes">
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="service" value="Lawn Maintenance">
+                                <span class="checkbox-label">Lawn Maintenance</span>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="service" value="Shrub & Hedge Trimming">
+                                <span class="checkbox-label">Shrub & Hedge Trimming</span>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="service" value="Spring Cleanup">
+                                <span class="checkbox-label">Spring Cleanup</span>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="service" value="Fall Cleanup">
+                                <span class="checkbox-label">Fall Cleanup</span>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="service" value="Mulching">
+                                <span class="checkbox-label">Mulching</span>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="service" value="Aeration">
+                                <span class="checkbox-label">Aeration</span>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="service" value="Fertilization">
+                                <span class="checkbox-label">Fertilization</span>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="service" value="Weed Control">
+                                <span class="checkbox-label">Weed Control</span>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="service" value="Snow Removal">
+                                <span class="checkbox-label">Snow Removal</span>
+                            </label>
+                        </div>
+
+                        <span class="error-message" id="servicesError"></span>
+
+                        <!-- SMS/Text Message Consent - Twilio A2P 10DLC Mixed Campaign Compliant -->
+                        <div class="sms-consent-box">
+                            <div class="sms-consent-header">
+                                <span class="sms-consent-icon">💬</span>
+                                <h3>SMS/Text Message Consent</h3>
+                            </div>
+                            <p class="sms-consent-description">Would you like to receive text message updates from Pappas & Co. Landscaping?</p>
+
+                            <div class="sms-consent-group">
+                                <label class="checkbox-consent">
+                                    <input type="checkbox" name="consentTransactional" id="consentTransactional">
+                                    <span class="consent-text">By checking, you are allowing to receive <strong>transactional/informational SMS</strong> communications regarding your quote, appointment reminders, scheduling updates, service notifications, invoice alerts, and customer care from <strong>Pappas & Co. Landscaping</strong>. Messages frequency may vary. Data rates may apply, <strong>reply STOP to opt-out.</strong></span>
+                                </label>
+                            </div>
+
+                            <div class="sms-consent-group">
+                                <label class="checkbox-consent">
+                                    <input type="checkbox" name="consentMarketing" id="consentMarketing">
+                                    <span class="consent-text">By checking, you are allowing to receive <strong>promotional/marketing SMS</strong> communications from <strong>Pappas & Co. Landscaping</strong>. Frequency may vary, Data rates may apply, <strong>reply HELP for help or STOP to opt-out.</strong></span>
+                                </label>
+                            </div>
+
+                            <div class="sms-consent-group">
+                                <label class="checkbox-consent">
+                                    <input type="checkbox" name="consentTerms" id="consentTerms">
+                                    <span class="consent-text">By checking, I accept the <a href="/terms" target="_blank">Terms of Service</a> &amp; <a href="/privacy" target="_blank">Privacy Policy</a>.</span>
+                                </label>
+                            </div>
+
+                            <p class="sms-consent-note">Consent is not required to submit this form or purchase any goods or services.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary btn-next" id="step1Next">Continue →</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Property Confirmation -->
+                <div class="form-step" data-step="2">
+                    <div class="form-section">
+                        <h2>Confirm Your Property</h2>
+                        <p class="section-subtitle">We'll use this address to prepare your quote</p>
+
+                        <div class="address-confirmation">
+                            <p>Please confirm this is the correct property location.</p>
+                            <div class="confirmed-address" id="confirmedAddress"></div>
+                            
+                            <!-- Map Container -->
+                            <div id="propertyMap" style="width: 100%; height: 400px; border-radius: 12px; margin: 2rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"></div>
+                            
+                            <p class="helper-text">We'll measure your property and provide accurate pricing based on this address.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary btn-prev" id="step2Prev">← Back</button>
+                        <button type="button" class="btn btn-primary btn-next" id="step2Next">Looks Good, Continue →</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Review & Submit -->
+                <div class="form-step" data-step="3">
+                    <div class="form-section">
+                        <h2>Review Your Request</h2>
+                        <div class="review-grid">
+                            <div class="review-item">
+                                <strong>Name</strong>
+                                <span id="reviewName">-</span>
+                            </div>
+                            <div class="review-item">
+                                <strong>Email</strong>
+                                <span id="reviewEmail">-</span>
+                            </div>
+                            <div class="review-item">
+                                <strong>Phone</strong>
+                                <span id="reviewPhone">-</span>
+                            </div>
+                            <div class="review-item">
+                                <strong>Address</strong>
+                                <span id="reviewAddress">-</span>
+                            </div>
+                            <div class="review-item full-width">
+                                <strong>Package</strong>
+                                <span id="reviewPackage">-</span>
+                            </div>
+                            <div class="review-item full-width">
+                                <strong>Services</strong>
+                                <span id="reviewServices">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Quick Questions</h3>
+                        <p class="section-subtitle">Help us prepare for your service</p>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Do you have a gate? <span class="required">*</span></label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="gate" value="No" required> No</label>
+                                    <label><input type="radio" name="gate" value="Yes"> Yes</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Do you have dogs? <span class="required">*</span></label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="dogs" value="No" required> No</label>
+                                    <label><input type="radio" name="dogs" value="Yes"> Yes</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Is your lawn over 6 inches? <span class="required">*</span></label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="lawnHeight" value="No" required> No</label>
+                                    <label><input type="radio" name="lawnHeight" value="Yes"> Yes</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Preferred contact method? <span class="required">*</span></label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="contactMethod" value="Call" required> Call</label>
+                                    <label><input type="radio" name="contactMethod" value="Text"> Text</label>
+                                    <label><input type="radio" name="contactMethod" value="Email"> Email</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>When do you want to start service? <span class="required">*</span></label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="startTime" value="ASAP" required> ASAP</label>
+                                    <label><input type="radio" name="startTime" value="Next Week"> Next Week</label>
+                                    <label><input type="radio" name="startTime" value="Just Pricing"> Just Pricing</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Do we have permission to access your backyard? <span class="required">*</span></label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="backyardAccess" value="Yes" required> Yes</label>
+                                    <label><input type="radio" name="backyardAccess" value="No"> No</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="notes">Anything else we should know? (optional)</label>
+                            <textarea id="notes" name="notes" rows="4"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary btn-prev" id="step3Prev">← Back</button>
+                        <button type="submit" class="btn btn-primary btn-submit" id="submitBtn">Submit Quote Request</button>
+                    </div>
+                </div>
+
+                <!-- Success Message -->
+                <div class="form-step success-step" data-step="4">
+                    <div class="success-message">
+                        <div class="success-icon">✓</div>
+                        <h2>Quote Request Submitted!</h2>
+                        <p>We'll text or email your quote soon.</p>
+                        <button type="button" class="btn btn-primary" onclick="window.location.reload()">Submit Another Request</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Pappas & Co. Landscaping</h4>
+                    <p>PO Box 770057<br>Lakewood, OH 44107</p>
+                    <p><a href="tel:4408867318">(440) 886-7318</a></p>
+                    <p><a href="/cdn-cgi/l/email-protection#f8909d949497dedbceccc388998888998b9499969c8b9b998891969fdedbcccec39b9795">hello&#64;pappaslandscaping&#46;com</a></p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href='/about'>About Us</a></li>
+                        <li><a href='/services'>Services</a></li>
+                        <li><a href='/reviews'>Reviews</a></li>
+                        <li><a href='/blog'>Blog</a></li>
+                        <li><a href='/faq'>FAQ</a></li>
+                        <li><a href='/contact'>Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Customer</h4>
+                    <ul>
+                        <li><a href="https://secure.copilotcrm.com/client/login/portal/5261" target="_blank">Client Portal</a></li>
+                        <li><a href='/privacy'>Privacy Policy</a></li>
+                        <li><a href='/terms'>Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Pappas & Co. Landscaping. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Inline error message styles (in case not in quote.css) -->
+    <style>
+        .error-message {
+            color: #e53e3e;
+            font-size: 0.85rem;
+            margin-top: 4px;
+            display: block;
+            min-height: 0;
+        }
+        .form-group input.input-error,
+        .form-group select.input-error {
+            border-color: #e53e3e !important;
+            box-shadow: 0 0 0 2px rgba(229, 62, 62, 0.15) !important;
+        }
+        .package-card {
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .package-card.selected {
+            border-color: #2d6a4f !important;
+            box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.25), 0 4px 12px rgba(0,0,0,0.1) !important;
+            transform: translateY(-2px);
+        }
+        .package-card.selected .package-header h3::after {
+            content: ' ✓';
+            color: #2d6a4f;
+        }
+        .checkbox-card input:checked + .checkbox-label {
+            border-color: #2d6a4f;
+            background: rgba(45, 106, 79, 0.05);
+        }
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        /* SMS Consent Checkbox Styling */
+        .sms-consent-group {
+            margin-top: 24px;
+            padding: 16px;
+            background: #f8faf9;
+            border: 1px solid #d1e0d8;
+            border-radius: 8px;
+        }
+        .sms-consent-group .checkbox-consent {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+            font-weight: normal;
+        }
+        .sms-consent-group .checkbox-consent input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            flex-shrink: 0;
+            accent-color: #2d6a4f;
+        }
+        .consent-text {
+            font-size: 0.9rem;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+        .consent-text a {
+            color: #2d6a4f;
+            text-decoration: underline;
+        }
+        .consent-text a:hover {
+            color: #1e4d38;
+        }
+        .sms-consent-group .error-message {
+            margin-left: 32px;
+        }
+    </style>
+
+    <!-- Define initAutocomplete BEFORE Google Maps loads -->
+    <script>
+    var autocomplete = null;
+    var addressData = {};
+    
+    function initAutocomplete() {
+        var addressInput = document.getElementById('address');
+        if (!addressInput) {
+            console.log('Address input not found, retrying...');
+            setTimeout(initAutocomplete, 100);
+            return;
+        }
+
+        autocomplete = new google.maps.places.Autocomplete(addressInput, {
+            types: ['address'],
+            componentRestrictions: { country: 'us' }
+        });
+
+        autocomplete.addListener('place_changed', function() {
+            var place = autocomplete.getPlace();
+            if (!place.geometry) return;
+
+            addressData = {
+                formatted: place.formatted_address,
+                lat: place.geometry.location.lat(),
+                lng: place.geometry.location.lng()
+            };
+
+            // Store in hidden field if exists
+            var hiddenAddress = document.getElementById('addressValue');
+            if (hiddenAddress) {
+                hiddenAddress.value = place.formatted_address;
+            }
+        });
+        
+        console.log('Google Maps Autocomplete initialized');
+    }
+    
+    // Phone formatting function
+    function formatPhone(value) {
+        var digits = value.replace(/\D/g, '');
+        if (digits.length === 0) return '';
+        if (digits.length <= 3) return digits;
+        if (digits.length <= 6) return digits.slice(0, 3) + '-' + digits.slice(3);
+        return digits.slice(0, 3) + '-' + digits.slice(3, 6) + '-' + digits.slice(6, 10);
+    }
+    
+    // Capitalize words function
+    function capitalizeWords(str) {
+        return str.replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+    }
+    
+    // Set up phone and name formatting when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Setting up phone and name formatting...');
+        
+        // Phone formatting
+        var phoneInput = document.getElementById('phone');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function() {
+                this.value = formatPhone(this.value);
+            });
+            console.log('Phone formatting enabled');
+        }
+        
+        // Auto-capitalize names on blur
+        var firstNameInput = document.getElementById('firstName');
+        var lastNameInput = document.getElementById('lastName');
+        
+        if (firstNameInput) {
+            firstNameInput.addEventListener('blur', function() {
+                this.value = capitalizeWords(this.value.trim());
+            });
+            console.log('First name capitalize enabled');
+        }
+        
+        if (lastNameInput) {
+            lastNameInput.addEventListener('blur', function() {
+                this.value = capitalizeWords(this.value.trim());
+            });
+            console.log('Last name capitalize enabled');
+        }
+    });
+    </script>
+
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBudNne7-RmZAwF3xo30UfPSdK3Z7g4fmQ&libraries=places&callback=initAutocomplete" async defer></script>
+
+    <!-- Shared site scripts (menu, nav scroll) -->
+    <script src="script.js"></script>
+
+    <!-- Quote Form JavaScript -->
+    <script>
+    // ============================================
+    // GLOBALS
+    // ============================================
+    var currentStep = 1;
+    var selectedPackage = '';
+    var map = null;
+    var marker = null;
+
+    // Prevent form submission on Enter in address field
+    document.addEventListener('DOMContentLoaded', function() {
+        var addressInput = document.getElementById('address');
+        if (addressInput) {
+            addressInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                }
+            });
+        }
+    });
+
+    function showMap() {
+        var mapDiv = document.getElementById('propertyMap');
+        if (!mapDiv) return;
+
+        var lat = addressData.lat || 41.4822;
+        var lng = addressData.lng || -81.7982;
+
+        map = new google.maps.Map(mapDiv, {
+            center: { lat: lat, lng: lng },
+            zoom: 18,
+            mapTypeId: 'hybrid'
+        });
+
+        marker = new google.maps.Marker({
+            position: { lat: lat, lng: lng },
+            map: map,
+            title: 'Service Address'
+        });
+    }
+
+    // ============================================
+    // PHONE FORMATTING
+    // ============================================
+    function formatPhone(value) {
+        var digits = value.replace(/\D/g, '');
+        if (digits.length === 0) return '';
+        if (digits.length <= 3) return digits;
+        if (digits.length <= 6) return digits.slice(0, 3) + '-' + digits.slice(3);
+        return digits.slice(0, 3) + '-' + digits.slice(3, 6) + '-' + digits.slice(6, 10);
+    }
+
+    // ============================================
+    // AUTO-CAPITALIZE
+    // ============================================
+    function capitalizeWords(str) {
+        return str.replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+    }
+
+    // ============================================
+    // VALIDATION
+    // ============================================
+    function clearErrors() {
+        var errors = document.querySelectorAll('.error-message');
+        errors.forEach(function(el) { el.textContent = ''; });
+        var inputs = document.querySelectorAll('.input-error');
+        inputs.forEach(function(el) { el.classList.remove('input-error'); });
+    }
+
+    function showError(fieldId, message) {
+        var errEl = document.getElementById(fieldId + 'Error');
+        if (errEl) errEl.textContent = message;
+        var input = document.getElementById(fieldId);
+        if (input) input.classList.add('input-error');
+    }
+
+    function validateStep1() {
+        clearErrors();
+        var valid = true;
+
+        var firstName = document.getElementById('firstName').value.trim();
+        var lastName = document.getElementById('lastName').value.trim();
+        var phone = document.getElementById('phone').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var source = document.getElementById('source').value;
+        var address = document.getElementById('address').value.trim();
+
+        if (!firstName) { showError('firstName', 'First name is required'); valid = false; }
+        if (!lastName) { showError('lastName', 'Last name is required'); valid = false; }
+
+        var phoneDigits = phone.replace(/\D/g, '');
+        if (!phone) { showError('phone', 'Phone number is required'); valid = false; }
+        else if (phoneDigits.length < 10) { showError('phone', 'Enter a valid 10-digit phone number'); valid = false; }
+
+        if (!email) { showError('email', 'Email is required'); valid = false; }
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('email', 'Enter a valid email address'); valid = false; }
+
+        if (!source) { showError('source', 'Please tell us how you found us'); valid = false; }
+        if (!address) { showError('address', 'Service address is required'); valid = false; }
+
+        // Check that at least a package or service is selected
+        var services = document.querySelectorAll('input[name="service"]:checked');
+        if (!selectedPackage && services.length === 0) {
+            document.getElementById('servicesError').textContent = 'Please select a package or at least one service';
+            valid = false;
+        }
+
+        // SMS consent is optional - not required to submit a quote
+
+        return valid;
+    }
+
+    function validateStep3() {
+        var radioGroups = ['gate', 'dogs', 'lawnHeight', 'contactMethod', 'startTime', 'backyardAccess'];
+        var valid = true;
+        
+        radioGroups.forEach(function(name) {
+            var checked = document.querySelector('input[name="' + name + '"]:checked');
+            if (!checked) {
+                valid = false;
+                // Highlight the radio group
+                var radios = document.querySelectorAll('input[name="' + name + '"]');
+                if (radios.length > 0) {
+                    var group = radios[0].closest('.form-group');
+                    if (group) {
+                        group.style.outline = '2px solid #e53e3e';
+                        group.style.outlineOffset = '4px';
+                        group.style.borderRadius = '8px';
+                        setTimeout(function() {
+                            group.style.outline = 'none';
+                        }, 3000);
+                    }
+                }
+            }
+        });
+
+        if (!valid) {
+            alert('Please answer all required questions before submitting.');
+        }
+
+        return valid;
+    }
+
+    // ============================================
+    // STEP NAVIGATION
+    // ============================================
+    function goToStep(step) {
+        // Hide all steps
+        var steps = document.querySelectorAll('.form-step');
+        steps.forEach(function(s) { s.classList.remove('active'); });
+
+        // Show target step
+        var target = document.querySelector('.form-step[data-step="' + step + '"]');
+        if (target) target.classList.add('active');
+
+        // Update progress bar
+        var progressSteps = document.querySelectorAll('.progress-step');
+        progressSteps.forEach(function(ps) {
+            var stepNum = parseInt(ps.getAttribute('data-step'));
+            ps.classList.remove('active', 'completed');
+            if (stepNum === step) ps.classList.add('active');
+            if (stepNum < step) ps.classList.add('completed');
+        });
+
+        currentStep = step;
+
+        // Scroll to top of form
+        var quoteSection = document.querySelector('.quote-section');
+        if (quoteSection) {
+            quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    // ============================================
+    // POPULATE REVIEW PAGE
+    // ============================================
+    function populateReview() {
+        var firstName = capitalizeWords(document.getElementById('firstName').value.trim());
+        var lastName = capitalizeWords(document.getElementById('lastName').value.trim());
+
+        document.getElementById('reviewName').textContent = firstName + ' ' + lastName;
+        document.getElementById('reviewEmail').textContent = document.getElementById('email').value.trim();
+        document.getElementById('reviewPhone').textContent = document.getElementById('phone').value.trim();
+        document.getElementById('reviewAddress').textContent = document.getElementById('address').value.trim();
+
+        // Package
+        if (selectedPackage) {
+            var packageNames = {
+                'essential': 'Essential Care',
+                'complete': 'Complete Care',
+                'premium': 'Premium Care'
+            };
+            document.getElementById('reviewPackage').textContent = packageNames[selectedPackage] || selectedPackage;
+        } else {
+            document.getElementById('reviewPackage').textContent = 'None selected';
+        }
+
+        // Individual services
+        var checkedServices = document.querySelectorAll('input[name="service"]:checked');
+        if (checkedServices.length > 0) {
+            var serviceNames = [];
+            checkedServices.forEach(function(cb) { serviceNames.push(cb.value); });
+            document.getElementById('reviewServices').textContent = serviceNames.join(', ');
+        } else {
+            document.getElementById('reviewServices').textContent = 'None selected';
+        }
+    }
+
+    // ============================================
+    // FORM SUBMISSION
+    // ============================================
+    function submitForm(e) {
+        e.preventDefault();
+
+        if (!validateStep3()) return;
+
+        var submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+
+        var firstName = capitalizeWords(document.getElementById('firstName').value.trim());
+        var lastName = capitalizeWords(document.getElementById('lastName').value.trim());
+
+        // Gather selected services
+        var checkedServices = document.querySelectorAll('input[name="service"]:checked');
+        var servicesList = [];
+        checkedServices.forEach(function(cb) { servicesList.push(cb.value); });
+
+        // Get radio values
+        function getRadio(name) {
+            var el = document.querySelector('input[name="' + name + '"]:checked');
+            return el ? el.value : '';
+        }
+
+        var formData = {
+            firstName: firstName,
+            lastName: lastName,
+            name: firstName + ' ' + lastName,
+            phone: document.getElementById('phone').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            source: document.getElementById('source').value,
+            address: document.getElementById('address').value.trim(),
+            package: selectedPackage ? (selectedPackage.charAt(0).toUpperCase() + selectedPackage.slice(1)) + ' Care' : 'None',
+            services: servicesList.join(', ') || 'None',
+            gate: getRadio('gate'),
+            dogs: getRadio('dogs'),
+            lawnHeight: getRadio('lawnHeight'),
+            contactMethod: getRadio('contactMethod'),
+            startTime: getRadio('startTime'),
+            backyardAccess: getRadio('backyardAccess'),
+            notes: document.getElementById('notes').value.trim(),
+            consentTransactional: document.getElementById('consentTransactional').checked,
+            consentMarketing: document.getElementById('consentMarketing').checked,
+            consentTerms: document.getElementById('consentTerms').checked
+        };
+
+        // Get reCAPTCHA token before submitting
+        function sendFormData(recaptchaToken) {
+            if (recaptchaToken) {
+                formData.recaptchaToken = recaptchaToken;
+            }
+            
+            fetch('https://pappas-quote-backend-production.up.railway.app/api/quotes', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(function(response) {
+                if (!response.ok) throw new Error('Server error: ' + response.status);
+                return response.json();
+            })
+            .then(function(data) {
+                // Show success
+                goToStep(4);
+
+                // Hide progress bar on success
+                var progressBar = document.querySelector('.progress-bar');
+                if (progressBar) progressBar.style.display = 'none';
+            })
+            .catch(function(error) {
+                console.error('Submission error:', error);
+                alert('There was a problem submitting your request. Please try again or call us at (440) 886-7318.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Quote Request';
+            });
+        }
+        
+        // Try to get reCAPTCHA token with timeout fallback
+        var recaptchaTimeout = setTimeout(function() {
+            console.log('reCAPTCHA timeout, submitting without token');
+            sendFormData(null);
+        }, 1000); // 1 second timeout
+        
+        if (typeof grecaptcha !== 'undefined' && typeof grecaptcha.execute === 'function') {
+            try {
+                grecaptcha.ready(function() {
+                    grecaptcha.execute('6LeNqnQsAAAAAGgwOp8QUnjq6U8HZNoC1tVFTTV3', {action: 'quote_submit'})
+                        .then(function(token) {
+                            clearTimeout(recaptchaTimeout);
+                            console.log('reCAPTCHA token obtained');
+                            sendFormData(token);
+                        })
+                        .catch(function(err) {
+                            clearTimeout(recaptchaTimeout);
+                            console.error('reCAPTCHA error:', err);
+                            sendFormData(null);
+                        });
+                });
+            } catch (err) {
+                clearTimeout(recaptchaTimeout);
+                console.error('reCAPTCHA exception:', err);
+                sendFormData(null);
+            }
+        } else {
+            clearTimeout(recaptchaTimeout);
+            console.log('reCAPTCHA not available, submitting without token');
+            sendFormData(null);
+        }
+    }
+
+    // ============================================
+    // EVENT LISTENERS
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // Phone formatting
+        var phoneInput = document.getElementById('phone');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function() {
+                var cursorPos = this.selectionStart;
+                var oldLength = this.value.length;
+                this.value = formatPhone(this.value);
+                var newLength = this.value.length;
+                // Adjust cursor position
+                cursorPos += (newLength - oldLength);
+                this.setSelectionRange(cursorPos, cursorPos);
+            });
+        }
+
+        // Auto-capitalize first/last names on blur
+        var firstNameInput = document.getElementById('firstName');
+        var lastNameInput = document.getElementById('lastName');
+        if (firstNameInput) {
+            firstNameInput.addEventListener('blur', function() {
+                this.value = capitalizeWords(this.value.trim());
+            });
+        }
+        if (lastNameInput) {
+            lastNameInput.addEventListener('blur', function() {
+                this.value = capitalizeWords(this.value.trim());
+            });
+        }
+
+        // Package selection (toggle on/off)
+        var packageCards = document.querySelectorAll('.package-card');
+        packageCards.forEach(function(card) {
+            card.addEventListener('click', function() {
+                var pkg = this.getAttribute('data-package');
+
+                if (selectedPackage === pkg) {
+                    // Deselect — toggle off
+                    this.classList.remove('selected');
+                    selectedPackage = '';
+                } else {
+                    // Deselect all others, select this one
+                    packageCards.forEach(function(c) { c.classList.remove('selected'); });
+                    this.classList.add('selected');
+                    selectedPackage = pkg;
+                }
+            });
+        });
+
+        // Step 1 → Step 2
+        var step1Next = document.getElementById('step1Next');
+        if (step1Next) {
+            step1Next.addEventListener('click', function() {
+                if (validateStep1()) {
+                    // Auto-capitalize names before moving on
+                    document.getElementById('firstName').value = capitalizeWords(document.getElementById('firstName').value.trim());
+                    document.getElementById('lastName').value = capitalizeWords(document.getElementById('lastName').value.trim());
+
+                    // Show address on step 2
+                    var confirmedAddr = document.getElementById('confirmedAddress');
+                    if (confirmedAddr) {
+                        confirmedAddr.textContent = document.getElementById('address').value.trim();
+                    }
+
+                    goToStep(2);
+
+                    // Show map after step transition
+                    setTimeout(showMap, 300);
+                }
+            });
+        }
+
+        // Step 2 → Back
+        var step2Prev = document.getElementById('step2Prev');
+        if (step2Prev) {
+            step2Prev.addEventListener('click', function() { goToStep(1); });
+        }
+
+        // Step 2 → Step 3
+        var step2Next = document.getElementById('step2Next');
+        if (step2Next) {
+            step2Next.addEventListener('click', function() {
+                populateReview();
+                goToStep(3);
+            });
+        }
+
+        // Step 3 → Back
+        var step3Prev = document.getElementById('step3Prev');
+        if (step3Prev) {
+            step3Prev.addEventListener('click', function() { goToStep(2); setTimeout(showMap, 300); });
+        }
+
+        // Form submit
+        var form = document.getElementById('quoteForm');
+        if (form) {
+            form.addEventListener('submit', submitForm);
+        }
+
+        // Clear errors on input
+        var allInputs = document.querySelectorAll('input, select');
+        allInputs.forEach(function(input) {
+            input.addEventListener('input', function() {
+                clearErrors();
+            });
+        });
+    });
+    </script>
+</body>
+</html>

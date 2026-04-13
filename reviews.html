@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews & Testimonials Cleveland | Pappas & Co. Landscaping</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="description" content="Read 132+ five-star reviews from satisfied lawn care customers in Cleveland, Lakewood, and Bay Village. See why neighbors recommend Pappas & Co.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .reviews-carousel {
+            position: relative;
+            overflow: hidden;
+            padding: 0 3rem;
+        }
+
+        .reviews-track {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.4s ease;
+        }
+
+        .review-card {
+            min-width: calc(33.333% - 1.33rem);
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .review-stars {
+            color: #ffc107;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-text {
+            color: var(--charcoal);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: var(--green-dark);
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--green-primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .carousel-nav:hover {
+            background: var(--green-dark);
+        }
+
+        .carousel-nav.prev {
+            left: 0;
+        }
+
+        .carousel-nav.next {
+            right: 0;
+        }
+
+        .google-rating {
+            text-align: center;
+            padding: 3rem 0;
+            background: var(--gray-light);
+            margin-bottom: 3rem;
+        }
+
+        .rating-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--green-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .rating-stars {
+            font-size: 2rem;
+            color: #ffc107;
+            margin-bottom: 1rem;
+        }
+
+        .rating-text {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .review-card {
+                min-width: calc(50% - 1rem);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .review-card {
+                min-width: 100%;
+            }
+
+            .reviews-carousel {
+                padding: 0 1rem;
+            }
+
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G3K6X5HFBW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-G3K6X5HFBW');
+    </script>
+</head>
+<body>
+    <!-- Top Contact Bar -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-left">
+                <a href="tel:4408867318" class="top-bar-link">
+                    <span class="top-bar-icon">📞</span>
+                    <span>(440) 886-7318</span>
+                </a>
+                <span class="top-bar-divider">|</span>
+                <span class="top-bar-text">Call or Text Us</span>
+            </div>
+            <div class="top-bar-right">
+                <span class="top-bar-cta">Ready for a better lawn? Let&#x27;s chat</span>
+                <a href="mailto:hello@pappaslandscaping.com">hello@pappaslandscaping.com</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo-horizontal.svg" alt="Pappas & Co. Landscaping" class="logo-img">
+            </a>
+            
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="reviews.html" class="active">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="https://secure.copilotcrm.com/client/login/portal/5261" target="_blank">Client Portal</a></li>
+                <li><a href="quote.html" class="cta-nav">Get a Quote</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero" style="background: var(--green-primary); padding: 4rem 0; text-align: center;">
+        <div class="container">
+            <h1 style="color: white; font-size: 2.5rem; margin-bottom: 1rem;">Client Testimonials</h1>
+            <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem;">Hear What Our Customers Have to Say</p>
+        </div>
+    </section>
+
+    <!-- Google Rating -->
+    <section class="google-rating">
+        <div class="container">
+            <div class="rating-number">4.9</div>
+            <div class="rating-stars">★★★★★</div>
+            <div class="rating-text">Based on 132+ Google Reviews</div>
+            <div style="margin-top: 1rem;">
+                <span style="color: #4285F4;">G</span><span style="color: #EA4335;">o</span><span style="color: #FBBC04;">o</span><span style="color: #4285F4;">g</span><span style="color: #34A853;">l</span><span style="color: #EA4335;">e</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Carousel -->
+    <section style="padding: 4rem 0; background: white;">
+        <div class="container">
+            <div class="reviews-carousel">
+                <button class="carousel-nav prev" onclick="moveCarousel(-1)">‹</button>
+                <button class="carousel-nav next" onclick="moveCarousel(1)">›</button>
+                
+                <div class="reviews-track" id="reviewsTrack">
+                    <!-- Real Customer Reviews -->
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"I recently hired Pappas & Co. for a complete landscaping renovation, and I couldn't be happier with the results! From the initial consultation to the final touches, Tim was professional, friendly, and incredibly knowledgeable. The quality of their work is outstanding; my yard has been transformed into a beautiful outdoor paradise. I highly recommend them to anyone looking for top-notch landscaping services."</p>
+                        <div class="review-author">— Nathan Burchak, 7 months ago</div>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Tim is a solid dude and always does a great job. Quick to respond when you need anything extra done or have any questions. 100% recommend, been with them for 3 years now."</p>
+                        <div class="review-author">— Ernie, 3 months ago</div>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"This is a great company. I received awesome service. Did a great job on my lawn and my bushes at very reasonable prices. Would highly recommend them. The guys are very personable and friendly."</p>
+                        <div class="review-author">— Marlene Tobin, 4 months ago</div>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Pappas was quick to respond to my unexpected need for a new lawn service. I appreciate the text updates!"</p>
+                        <div class="review-author">— Alice Dinicola, 6 months ago</div>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Pappas Landscaping is reliable and they do a great job. We have been with them for a number of years and have always been pleased with their prompt responses to our requests and questions."</p>
+                        <div class="review-author">— Mary Osburn, 7 months ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leave a Review CTA -->
+    <section style="padding: 4rem 0; background: var(--cream); text-align: center;">
+        <div class="container">
+            <h2 style="font-size: 2rem; color: var(--green-dark); margin-bottom: 1rem;">Love Your Lawn?</h2>
+            <p style="font-size: 1.1rem; color: var(--gray); margin-bottom: 2rem;">We'd love to hear about your experience!</p>
+            <a href="https://g.page/r/CXOm9gkatDbPEAE/review" target="_blank" class="btn btn-primary btn-lg">Leave us a Review on Google</a>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="final-cta">
+        <div class="container" style="text-align: center;">
+            <h2 style="color: white; font-size: 2rem; margin-bottom: 1rem;">Ready to Join Our Happy Customers?</h2>
+            <p style="color: rgba(255,255,255,0.9); margin-bottom: 2rem;">Get your free quote today</p>
+            <a href="quote.html" class="btn btn-secondary btn-lg">Get Your Free Quote</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Pappas & Co. Landscaping</h4>
+                    <p>PO Box 770057<br>Lakewood, OH 44107</p>
+                    <p><a href="tel:4408867318">(440) 886-7318</a></p>
+                    <p><a href="mailto:hello@pappaslandscaping.com">hello@pappaslandscaping.com</a></p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Customer</h4>
+                    <ul>
+                        <li><a href="quote.html">Get a Quote</a></li>
+                        <li><a href="https://secure.copilotcrm.com/client/login/portal/5261" target="_blank">Client Portal</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Pappas & Co. Landscaping. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Carousel functionality
+        let currentIndex = 0;
+
+        function moveCarousel(direction) {
+            const track = document.getElementById('reviewsTrack');
+            const cards = track.querySelectorAll('.review-card');
+            if (cards.length === 0) return;
+            
+            const cardWidth = cards[0].offsetWidth + 32;
+            const visibleCards = window.innerWidth > 1024 ? 3 : window.innerWidth > 768 ? 2 : 1;
+            const maxIndex = Math.max(0, cards.length - visibleCards);
+            
+            currentIndex = Math.max(0, Math.min(maxIndex, currentIndex + direction));
+            track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+        }
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>

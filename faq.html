@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Lawn Care & Snow Removal Questions | Pappas & Co. Landscaping Cleveland</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- FAQ Schema Markup for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What areas do you serve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We proudly serve Lakewood, Cleveland, Bay Village, Brook Park, Rocky River, Westlake, Fairview Park, and Parma. If you're in a nearby area, give us a call - we might be able to help!"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does lawn care cost in Cleveland?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every property is different! Pricing depends on your lawn size, services needed, and frequency. We offer free quotes - just fill out our online form or give us a call at (440) 886-7318."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When should I schedule aeration?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We recommend aerating your lawn twice per year - once in spring and once in fall. Aeration helps relieve soil compaction, improves drainage, and allows nutrients to reach grass roots more effectively."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What time do you plow?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We aim to have driveways cleared before you head to work in the morning. During heavy snowfall events, we operate 24/7 to keep up with accumulation. Most customers wake up to a clear driveway."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a contract?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For seasonal services like regular lawn maintenance, we typically work on a seasonal agreement (March-November). For one-time services, there's no long-term commitment required."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        .faq-hero {
+            background: var(--green-primary);
+            color: white;
+            text-align: center;
+            padding: 5rem 0 3rem;
+            margin-top: 0;
+        }
+
+        .faq-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .faq-hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .faq-section {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .faq-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .faq-category-card {
+            background: var(--gray-light);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .faq-category-card:hover {
+            border-color: var(--green-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .faq-category-card h3 {
+            color: var(--green-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border: 2px solid var(--gray-light);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--green-primary);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--green-dark);
+            font-size: 1.1rem;
+        }
+
+        .faq-question:hover {
+            background: var(--gray-light);
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: var(--green-primary);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 2rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 2rem 1.5rem 2rem;
+        }
+
+        .faq-answer p {
+            color: var(--charcoal);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .faq-answer ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .faq-answer li {
+            color: var(--charcoal);
+            line-height: 1.7;
+            margin-bottom: 0.5rem;
+        }
+
+        .still-have-questions {
+            background: var(--cream);
+            padding: 4rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .still-have-questions h2 {
+            font-size: 2rem;
+            color: var(--green-dark);
+            margin-bottom: 1rem;
+        }
+
+        .still-have-questions p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .faq-hero h1 {
+                font-size: 2rem;
+            }
+
+            .faq-question {
+                font-size: 1rem;
+                padding: 1.2rem 1.5rem;
+            }
+
+            .faq-answer {
+                padding: 0 1.5rem;
+            }
+
+            .faq-item.active .faq-answer {
+                padding: 0 1.5rem 1.2rem 1.5rem;
+            }
+        }
+    </style>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G3K6X5HFBW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-G3K6X5HFBW');
+    </script>
+</head>
+<body>
+    <!-- Top Contact Bar -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-left">
+                <a href="tel:4408867318" class="top-bar-link">
+                    <span class="top-bar-icon">📞</span>
+                    <span>(440) 886-7318</span>
+                </a>
+                <span class="top-bar-divider">|</span>
+                <span class="top-bar-text">Call or Text Us</span>
+            </div>
+            <div class="top-bar-right">
+                <span class="top-bar-cta">Ready for a better lawn? Let&#x27;s chat</span>
+                <a href="mailto:hello@pappaslandscaping.com">hello@pappaslandscaping.com</a>
+                    <span>hello@pappaslandscaping.com</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo-horizontal.svg" alt="Pappas & Co. Landscaping" class="logo-img">
+            </a>
+            
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="https://secure.copilotcrm.com/client/login/portal/5261" target="_blank">Client Portal</a></li>
+                <li><a href="quote.html" class="cta-nav">Get a Quote</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="faq-hero">
+        <div class="container">
+            <h1>Frequently Asked Questions</h1>
+            <p>Everything you need to know about our services</p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-list">
+                
+                <!-- General Questions -->
+                <h2 style="margin-bottom: 2rem; color: var(--green-dark);">General Questions</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What areas do you service?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We proudly serve Cleveland and surrounding areas including Lakewood, Bay Village, Brook Park, Rocky River, Westlake, Fairview Park, and Parma. Don't see your area listed? Give us a call at (440) 886-7318 - we might still be able to help!</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How quickly can I get a quote?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We typically respond to quote requests within 1 business day. You can request a quote online through our website, or call us directly at (440) 886-7318 for immediate assistance.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you offer one-time services or just recurring maintenance?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer both! Whether you need a one-time spring cleanup, regular weekly mowing, or a comprehensive year-round package, we've got you covered. You can choose from our pre-built packages or create a custom plan that fits your needs.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Are you insured?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely. We are fully licensed and insured to protect both our team and your property.</p>
+                    </div>
+                </div>
+
+                <!-- Lawn Care Services -->
+                <h2 style="margin: 3rem 0 2rem; color: var(--green-dark);">Lawn Care Services</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What's included in weekly lawn maintenance?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our weekly lawn maintenance includes:</p>
+                        <ul>
+                            <li>Professional mowing with sharp blades</li>
+                            <li>String trimming around edges and obstacles</li>
+                            <li>Edging along sidewalks and driveways</li>
+                            <li>Blowing off all hard surfaces (driveway, walkways, patio)</li>
+                        </ul>
+                        <p>We leave your property looking professionally maintained every single visit.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>When does lawn care season start and end?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our lawn care season typically runs from March through November, depending on weather conditions. We'll start mowing when grass begins actively growing in spring and continue through fall until growth stops for the season.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do I need to be home when you service my lawn?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nope! Most of our customers aren't home during service. As long as we have access to your property and any gates are unlocked (or you've provided us with gate codes), we'll take care of everything. You'll come home to a beautifully maintained lawn.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What if I have dogs?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We work with pets all the time! Just let us know about your dogs when you request a quote, and we'll work out the best arrangement. Some clients keep their dogs inside during service, while others have fenced areas we can work around.</p>
+                    </div>
+                </div>
+
+                <!-- Seasonal Services -->
+                <h2 style="margin: 3rem 0 2rem; color: var(--green-dark);">Seasonal Services</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What's included in spring cleanup?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Spring cleanup includes:</p>
+                        <ul>
+                            <li>Removal of leaves, sticks, and winter debris</li>
+                            <li>Cutting back perennials and ornamental grasses</li>
+                            <li>Bed edging and definition</li>
+                            <li>First mow of the season</li>
+                            <li>Complete property cleanup and hauling away all debris</li>
+                        </ul>
+                        <p>We get your property ready for the growing season ahead.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>When should I schedule aeration?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We recommend aerating your lawn twice per year - once in spring and once in fall. Aeration helps relieve soil compaction, improves drainage, and allows nutrients to reach grass roots more effectively. It's one of the best things you can do for a healthy lawn.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you handle leaf removal in the fall?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! Our fall cleanup service includes complete leaf removal from your lawn, beds, and hard surfaces. We typically do multiple visits throughout fall as leaves continue to drop, ensuring your property stays clean all season long.</p>
+                    </div>
+                </div>
+
+                <!-- Snow Removal -->
+                <h2 style="margin: 3rem 0 2rem; color: var(--green-dark);">Snow Removal</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How does snow removal pricing work?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Snow removal pricing is typically based on the size of your driveway and walkways, plus the amount of snowfall. We offer per-visit pricing as well as seasonal contracts. Contact us for a custom quote based on your property.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What time do you plow?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We aim to have driveways cleared before you head to work in the morning. During heavy snowfall events, we operate 24/7 to keep up with accumulation. Most customers wake up to a clear driveway - no need to even touch a shovel.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you offer salt/ice control services?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We offer salting and ice control services to keep your driveway and walkways safe during winter. This can be added to your snow plowing service or scheduled separately.</p>
+                    </div>
+                </div>
+
+                <!-- Pricing & Payment -->
+                <h2 style="margin: 3rem 0 2rem; color: var(--green-dark);">Pricing & Payment</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do you charge for services?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pricing depends on the service and your property size. For regular lawn maintenance, we typically charge a flat monthly or per-visit rate. One-time services like cleanups are quoted individually. We'll always provide clear, upfront pricing before any work begins.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What payment methods do you accept?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept checks, credit cards, and ACH bank transfers. Payment details and invoices are managed through our customer portal for your convenience.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is there a contract?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>For seasonal services like regular lawn maintenance, we typically work on a seasonal agreement (March-November). For one-time services, there's no long-term commitment required. We want you to stay with us because you love the service, not because you're locked into a contract.</p>
+                    </div>
+                </div>
+
+                <!-- Scheduling -->
+                <h2 style="margin: 3rem 0 2rem; color: var(--green-dark);">Scheduling & Communication</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How will I know when you're coming?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Regular maintenance customers are typically scheduled on the same day each week. You can also check your service schedule anytime through our customer portal. For one-time services, we'll schedule a specific date with you in advance.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What if it rains on my scheduled day?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We monitor weather conditions and will reschedule if needed. Light rain usually doesn't stop us (grass doesn't stop growing!), but we won't mow in heavy rain or when conditions would damage your lawn. We'll catch up as soon as conditions improve.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I skip a week or pause service?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! If you're going on vacation or need to pause service for any reason, just let us know ahead of time. We're flexible and will work with your schedule.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What if I'm not satisfied with the service?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Your satisfaction is our top priority. If you're ever unhappy with our work, call us immediately at (440) 886-7318. We'll come back and make it right - no questions asked. We're not satisfied until you are.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Still Have Questions -->
+    <section class="still-have-questions">
+        <div class="container-narrow">
+            <h2>Still Have Questions?</h2>
+            <p>We're here to help! Give us a call or send us a message.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="tel:4408867318" class="btn btn-primary btn-lg">Call (440) 886-7318</a>
+                <a href="contact.html" class="btn btn-secondary btn-lg">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Pappas & Co. Landscaping</h4>
+                    <p>PO Box 770057<br>Lakewood, OH 44107</p>
+                    <p><a href="tel:4408867318">(440) 886-7318</a></p>
+                    <p><a href="mailto:hello@pappaslandscaping.com">hello@pappaslandscaping.com</a></p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Customer</h4>
+                    <ul>
+                        <li><a href="quote.html">Get a Quote</a></li>
+                        <li><a href="https://secure.copilotcrm.com/client/login/portal/5261" target="_blank">Client Portal</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Pappas & Co. Landscaping. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lawn Care Tips & Advice Cleveland | Pappas & Co. Landscaping Blog</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="description" content="Expert lawn care tips for Cleveland homeowners. Learn when to aerate, fertilize, and maintain your lawn in Northeast Ohio's climate.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .blog-hero {
+            background: var(--green-primary);
+            color: white;
+            text-align: center;
+            padding: 5rem 0 3rem;
+            margin-top: 0;
+        }
+
+        .blog-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .blog-hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .blog-section {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .blog-card {
+            background: white;
+            border: 2px solid var(--gray-light);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover {
+            border-color: var(--green-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-card-image {
+            width: 100%;
+            height: 200px;
+            background: var(--gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .blog-card-content {
+            padding: 2rem;
+        }
+
+        .blog-category {
+            display: inline-block;
+            background: var(--green-accent);
+            color: var(--green-dark);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .blog-card h3 {
+            font-size: 1.5rem;
+            color: var(--green-dark);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .blog-card p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-read-more {
+            color: var(--green-primary);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .blog-read-more:hover {
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .blog-hero h1 {
+                font-size: 2rem;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G3K6X5HFBW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-G3K6X5HFBW');
+    </script>
+</head>
+<body>
+    <!-- Top Contact Bar -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-left">
+                <a href="tel:4408867318" class="top-bar-link">
+                    <span class="top-bar-icon">📞</span>
+                    <span>(440) 886-7318</span>
+                </a>
+                <span class="top-bar-divider">|</span>
+                <span class="top-bar-text">Call or Text Us</span>
+            </div>
+            <div class="top-bar-right">
+                <span class="top-bar-cta">Ready for a better lawn? Let&#x27;s chat</span>
+                <a href="mailto:hello@pappaslandscaping.com">hello@pappaslandscaping.com</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo-horizontal.svg" alt="Pappas & Co. Landscaping" class="logo-img">
+            </a>
+            
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="https://secure.copilotcrm.com/client/login/portal/5261" target="_blank">Client Portal</a></li>
+                <li><a href="quote.html" class="cta-nav">Get a Quote</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="blog-hero">
+        <div class="container">
+            <h1>Lawn Care Tips & Advice</h1>
+            <p>Expert insights for Cleveland-area homeowners</p>
+        </div>
+    </section>
+
+    <!-- Blog Posts -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="blog-grid">
+
+                <!-- Blog Post 1 - NEW -->
+                <div class="blog-card">
+                    <div class="blog-card-image">🌱</div>
+                    <div class="blog-card-content">
+                        <span class="blog-category">Lawn Care</span>
+                        <h3>5 Signs Your Lawn Needs Professional Help This Spring</h3>
+                        <div class="blog-meta">
+                            <span>📅 February 16, 2026</span>
+                            <span>•</span>
+                            <span>⏱️ 5 min read</span>
+                        </div>
+                        <p>Not sure if your lawn needs professional care this year? Here are the warning signs that it's time to call in the pros.</p>
+                        <a href="blog/5-signs-lawn-needs-professional-help.html" class="blog-read-more">Read More →</a>
+                    </div>
+                </div>
+
+                <!-- Blog Post 2 -->
+                <div class="blog-card">
+                    <div class="blog-card-image">🌱</div>
+                    <div class="blog-card-content">
+                        <span class="blog-category">Spring Maintenance</span>
+                        <h3>Your Spring Cleanup Checklist for Cleveland Lawns</h3>
+                        <div class="blog-meta">
+                            <span>📅 March 1, 2025</span>
+                            <span>•</span>
+                            <span>⏱️ 5 min read</span>
+                        </div>
+                        <p>Spring is finally here (we hope), and your lawn is waking up from its winter nap. Here's exactly what you need to do to get it looking great for the season ahead.</p>
+                        <a href="blog/spring-cleanup-checklist-cleveland.html" class="blog-read-more">Read More →</a>
+                    </div>
+                </div>
+
+                <!-- Blog Post 3 -->
+                <div class="blog-card">
+                    <div class="blog-card-image">💨</div>
+                    <div class="blog-card-content">
+                        <span class="blog-category">Lawn Care</span>
+                        <h3>When to Aerate Your Lawn in Ohio (And Why It Matters)</h3>
+                        <div class="blog-meta">
+                            <span>📅 April 15, 2025</span>
+                            <span>•</span>
+                            <span>⏱️ 6 min read</span>
+                        </div>
+                        <p>Aeration isn't the most exciting lawn care task, but it's one of the most important. Here's when to do it in Northeast Ohio and what happens if you skip it.</p>
+                        <a href="blog/when-to-aerate-lawn-ohio.html" class="blog-read-more">Read More →</a>
+                    </div>
+                </div>
+
+                <!-- Blog Post 3 -->
+                <div class="blog-card">
+                    <div class="blog-card-image">🌿</div>
+                    <div class="blog-card-content">
+                        <span class="blog-category">Fertilization</span>
+                        <h3>Best Time to Fertilize Your Lawn in Northeast Ohio</h3>
+                        <div class="blog-meta">
+                            <span>📅 May 1, 2025</span>
+                            <span>•</span>
+                            <span>⏱️ 7 min read</span>
+                        </div>
+                        <p>Timing is everything when it comes to fertilization. Here's when (and how often) to fertilize your Cleveland-area lawn for the best results.</p>
+                        <a href="blog/best-time-fertilize-northeast-ohio.html" class="blog-read-more">Read More →</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="final-cta">
+        <div class="container-narrow">
+            <h2>Want Us to Handle It For You?</h2>
+            <p>Skip the DIY and let the pros take care of your lawn</p>
+            <a href="quote.html" class="btn btn-primary btn-lg">Get Your Free Quote</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Pappas & Co. Landscaping</h4>
+                    <p>PO Box 770057<br>Lakewood, OH 44107</p>
+                    <p><a href="tel:4408867318">(440) 886-7318</a></p>
+                    <p><a href="mailto:hello@pappaslandscaping.com">hello@pappaslandscaping.com</a></p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Customer</h4>
+                    <ul>
+                        <li><a href="quote.html">Get a Quote</a></li>
+                        <li><a href="https://secure.copilotcrm.com/client/login/portal/5261" target="_blank">Client Portal</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Pappas & Co. Landscaping. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
