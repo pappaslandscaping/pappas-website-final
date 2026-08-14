@@ -1,0 +1,73 @@
+name: CI and health checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "47 11 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check JavaScript syntax
+        run: |
+          find . -type f -name '*.js' -print0 | xargs -0 -n1 node --check
+      - name: Check required pages and internal links
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib.parse import urlsplit
+
+          required = ["index.html", "quote.html", "contact.html", "services.html"]
+          missing = [name for name in required if not Path(name).is_file()]
+          if missing:
+              raise SystemExit("Missing required pages: " + ", ".join(missing))
+
+          class Links(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.links = []
+              def handle_starttag(self, tag, attrs):
+                  for key, value in attrs:
+                      if key in {"href", "src"} and value:
+                          self.links.append(value)
+
+          broken = []
+          for page in Path(".").rglob("*.html"):
+              parser = Links()
+              parser.feed(page.read_text(encoding="utf-8"))
+              for link in parser.links:
+                  parsed = urlsplit(link)
+                  if parsed.scheme or parsed.netloc or link.startswith(("#", "mailto:", "tel:", "data:", "//")):
+                      continue
+                  target = (page.parent / parsed.path).resolve()
+                  if parsed.path and not target.exists():
+                      broken.append(f"{page}: {link}")
+          if broken:
+              raise SystemExit("Broken local links:\n" + "\n".join(broken))
+          PY
+
+  production-health:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check configured public website
+        env:
+          HEALTHCHECK_URL: ${{ vars.HEALTHCHECK_URL }}
+        run: |
+          if [ -z "$HEALTHCHECK_URL" ]; then
+            echo "::notice::Set repository variable HEALTHCHECK_URL to enable the production probe."
+            exit 0
+          fi
+          curl --fail --silent --show-error --retry 3 --retry-all-errors --max-time 20 "$HEALTHCHECK_URL" > /dev/null
