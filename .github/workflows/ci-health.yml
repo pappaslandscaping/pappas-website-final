@@ -43,15 +43,26 @@ jobs:
                           self.links.append(value)
 
           broken = []
+          root = Path(".").resolve()
           for page in Path(".").rglob("*.html"):
               parser = Links()
               parser.feed(page.read_text(encoding="utf-8"))
               for link in parser.links:
                   parsed = urlsplit(link)
-                  if parsed.scheme or parsed.netloc or link.startswith(("#", "mailto:", "tel:", "data:", "//")):
+                  if parsed.scheme or parsed.netloc or link.startswith(("#", "mailto:", "tel:", "data:", "//", "/cdn-cgi/")):
                       continue
-                  target = (page.parent / parsed.path).resolve()
-                  if parsed.path and not target.exists():
+                  clean = parsed.path
+                  if not clean:
+                      continue
+                  if clean.startswith("/"):
+                      clean = clean.lstrip("/")
+                      target = root / clean
+                  else:
+                      target = (page.parent / clean).resolve()
+                  candidates = [target]
+                  if not target.suffix:
+                      candidates.extend([target.with_suffix(".html"), target / "index.html"])
+                  if not any(candidate.exists() for candidate in candidates):
                       broken.append(f"{page}: {link}")
           if broken:
               raise SystemExit("Broken local links:\n" + "\n".join(broken))
