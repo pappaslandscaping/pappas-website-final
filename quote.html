@@ -93,8 +93,13 @@
                 </div>
             </div>
 
-            <!-- Multi-Step Form -->
-            <form id="quoteForm" class="quote-form" novalidate>
+            <!-- Multi-Step Form; Netlify captures submissions when the primary API is unavailable. -->
+            <form id="quoteForm" class="quote-form" name="quote-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+                <input type="hidden" name="form-name" value="quote-request">
+                <input type="hidden" name="package" id="selectedPackageValue" value="None">
+                <p hidden>
+                    <label>Don't fill this out: <input name="bot-field"></label>
+                </p>
                 <!-- Step 1: Contact Info & Services -->
                 <div class="form-step active" data-step="1">
                     <div class="form-section">
@@ -909,43 +914,81 @@
             consentTerms: document.getElementById('consentTerms').checked
         };
 
+        function showSuccess() {
+            goToStep(4);
+
+            var progressBar = document.querySelector('.progress-bar');
+            if (progressBar) progressBar.style.display = 'none';
+        }
+
+        function showSubmissionError(error) {
+            console.error('Submission error:', error);
+            alert('There was a problem submitting your request. Please try again or call us at (440) 886-7318.');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit Quote Request';
+        }
+
+        // Netlify Forms is a fallback so requests are still captured if Railway is unavailable.
+        function submitToNetlify() {
+            var netlifyData = new URLSearchParams();
+            netlifyData.append('form-name', 'quote-request');
+            Object.keys(formData).forEach(function(key) {
+                netlifyData.append(key, String(formData[key]));
+            });
+
+            return fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: netlifyData.toString()
+            }).then(function(response) {
+                if (!response.ok) throw new Error('Netlify form error: ' + response.status);
+                showSuccess();
+            });
+        }
+
         // Get reCAPTCHA token before submitting
         function sendFormData(recaptchaToken) {
             if (recaptchaToken) {
                 formData.recaptchaToken = recaptchaToken;
             }
-            
+
+            var controller = new AbortController();
+            var requestTimeout = setTimeout(function() { controller.abort(); }, 8000);
+
             fetch('https://pappas-quote-backend-production.up.railway.app/api/quotes', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(formData),
+                signal: controller.signal
             })
             .then(function(response) {
                 if (!response.ok) throw new Error('Server error: ' + response.status);
                 return response.json();
             })
-            .then(function(data) {
-                // Show success
-                goToStep(4);
-
-                // Hide progress bar on success
-                var progressBar = document.querySelector('.progress-bar');
-                if (progressBar) progressBar.style.display = 'none';
+            .then(function() {
+                clearTimeout(requestTimeout);
+                showSuccess();
             })
             .catch(function(error) {
-                console.error('Submission error:', error);
-                alert('There was a problem submitting your request. Please try again or call us at (440) 886-7318.');
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Submit Quote Request';
+                clearTimeout(requestTimeout);
+                console.warn('Railway submission failed; using Netlify Forms fallback.', error);
+                submitToNetlify().catch(showSubmissionError);
             });
         }
-        
-        // Try to get reCAPTCHA token with timeout fallback
+
+        // Ensure exactly one submission even if reCAPTCHA is slow or unavailable.
+        var submissionStarted = false;
+        function submitOnce(token) {
+            if (submissionStarted) return;
+            submissionStarted = true;
+            sendFormData(token || null);
+        }
+
         var recaptchaTimeout = setTimeout(function() {
             console.log('reCAPTCHA timeout, submitting without token');
-            sendFormData(null);
-        }, 1000); // 1 second timeout
-        
+            submitOnce(null);
+        }, 5000);
+
         if (typeof grecaptcha !== 'undefined' && typeof grecaptcha.execute === 'function') {
             try {
                 grecaptcha.ready(function() {
@@ -953,23 +996,23 @@
                         .then(function(token) {
                             clearTimeout(recaptchaTimeout);
                             console.log('reCAPTCHA token obtained');
-                            sendFormData(token);
+                            submitOnce(token);
                         })
                         .catch(function(err) {
                             clearTimeout(recaptchaTimeout);
                             console.error('reCAPTCHA error:', err);
-                            sendFormData(null);
+                            submitOnce(null);
                         });
                 });
             } catch (err) {
                 clearTimeout(recaptchaTimeout);
                 console.error('reCAPTCHA exception:', err);
-                sendFormData(null);
+                submitOnce(null);
             }
         } else {
             clearTimeout(recaptchaTimeout);
             console.log('reCAPTCHA not available, submitting without token');
-            sendFormData(null);
+            submitOnce(null);
         }
     }
 
