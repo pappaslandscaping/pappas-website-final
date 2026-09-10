@@ -1055,7 +1055,7 @@
                 var controller = new AbortController();
                 var requestTimeout = setTimeout(function() { controller.abort(); }, 8000);
 
-                return fetch('https://pappas-quote-backend-production.up.railway.app/api/quotes', {
+                return fetch('https://app.pappaslandscaping.com/api/quotes', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData),
