@@ -623,6 +623,13 @@ nav.scrolled .logo-img {
     margin-bottom: 3.5rem;
 }
 
+.google-review-summary {
+    margin: -1rem 0 2rem;
+    color: var(--green-primary);
+    font-weight: 600;
+    text-align: center;
+}
+
 .testimonial-card {
     background: var(--gray-light);
     padding: 2.5rem;
