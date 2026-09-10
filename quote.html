@@ -97,6 +97,8 @@
             <form id="quoteForm" class="quote-form" name="quote-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
                 <input type="hidden" name="form-name" value="quote-request">
                 <input type="hidden" name="package" id="selectedPackageValue" value="None">
+                <!-- Declares the combined service list so Netlify includes it in saved submissions and alerts. -->
+                <input type="hidden" name="services" value="">
                 <p hidden>
                     <label>Don't fill this out: <input name="bot-field"></label>
                 </p>
@@ -928,7 +930,7 @@
             submitBtn.textContent = 'Submit Quote Request';
         }
 
-        // Netlify Forms is a fallback so requests are still captured if Railway is unavailable.
+        // Netlify Forms is the durable first stop for every request and sends the office alert.
         function submitToNetlify() {
             var netlifyData = new URLSearchParams();
             netlifyData.append('form-name', 'quote-request');
@@ -942,38 +944,39 @@
                 body: netlifyData.toString()
             }).then(function(response) {
                 if (!response.ok) throw new Error('Netlify form error: ' + response.status);
-                showSuccess();
             });
         }
 
-        // Get reCAPTCHA token before submitting
+        // Save to Netlify first so an office alert is never dependent on Railway.
+        // Then mirror the request to the office backend without holding up the customer.
         function sendFormData(recaptchaToken) {
             if (recaptchaToken) {
                 formData.recaptchaToken = recaptchaToken;
             }
 
-            var controller = new AbortController();
-            var requestTimeout = setTimeout(function() { controller.abort(); }, 8000);
-
-            fetch('https://pappas-quote-backend-production.up.railway.app/api/quotes', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
-                signal: controller.signal
-            })
-            .then(function(response) {
-                if (!response.ok) throw new Error('Server error: ' + response.status);
-                return response.json();
-            })
+            submitToNetlify()
             .then(function() {
-                clearTimeout(requestTimeout);
                 showSuccess();
+
+                var controller = new AbortController();
+                var requestTimeout = setTimeout(function() { controller.abort(); }, 8000);
+
+                return fetch('https://pappas-quote-backend-production.up.railway.app/api/quotes', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData),
+                    signal: controller.signal,
+                    keepalive: true
+                }).then(function(response) {
+                    clearTimeout(requestTimeout);
+                    if (!response.ok) throw new Error('Server error: ' + response.status);
+                    return response.json();
+                }).catch(function(error) {
+                    clearTimeout(requestTimeout);
+                    console.warn('Request was saved in Netlify, but the office-system mirror failed.', error);
+                });
             })
-            .catch(function(error) {
-                clearTimeout(requestTimeout);
-                console.warn('Railway submission failed; using Netlify Forms fallback.', error);
-                submitToNetlify().catch(showSubmissionError);
-            });
+            .catch(showSubmissionError);
         }
 
         // Ensure exactly one submission even if reCAPTCHA is slow or unavailable.
