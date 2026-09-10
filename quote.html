@@ -107,6 +107,7 @@
                 <p hidden>
                     <label>Don't fill this out: <input name="bot-field"></label>
                 </p>
+                <div id="draftRestoreNotice" style="display:none;background:#eef6e9;border:1px solid #c9dd80;color:#2e403d;padding:12px 16px;border-radius:8px;margin-bottom:16px;">We restored your unfinished quote request from this device.</div>
                 <div class="form-section" style="background:#f8faf9;border:1px solid #d1e0d8;">
                     <h3>Already a customer?</h3>
                     <p class="section-subtitle" style="margin-bottom:12px;">Use our service request form so your request connects directly to your HomeWorks customer profile.</p>
@@ -690,6 +691,61 @@
                 if (input.value.toLowerCase() === requestedService.toLowerCase()) input.checked = true;
             });
         }
+        var requestedPackage = pageParams.get('package');
+        if (requestedPackage) {
+            var requestedCard = document.querySelector('.package-card[data-package="' + requestedPackage.toLowerCase() + '"]');
+            if (requestedCard) {
+                selectedPackage = requestedPackage.toLowerCase();
+                document.querySelectorAll('.package-card').forEach(function(card) { card.classList.remove('selected'); });
+                requestedCard.classList.add('selected');
+                document.getElementById('selectedPackageValue').value = selectedPackage;
+            }
+        }
+
+        try {
+            var savedDraft = JSON.parse(localStorage.getItem('pappasQuoteDraft') || 'null');
+            if (savedDraft && Date.now() - savedDraft.savedAt < 7 * 24 * 60 * 60 * 1000) {
+                Object.keys(savedDraft.fields || {}).forEach(function(id) {
+                    var field = document.getElementById(id);
+                    if (field && field.type !== 'file') field.value = savedDraft.fields[id];
+                });
+                Object.keys(savedDraft.radios || {}).forEach(function(name) {
+                    var radio = document.querySelector('input[name="' + name + '"][value="' + CSS.escape(savedDraft.radios[name]) + '"]');
+                    if (radio) radio.checked = true;
+                });
+                (savedDraft.services || []).forEach(function(value) {
+                    var service = Array.from(document.querySelectorAll('input[name="service"]')).find(function(input) { return input.value === value; });
+                    if (service) service.checked = true;
+                });
+                ['consentTransactional', 'consentMarketing', 'consentTerms'].forEach(function(id) {
+                    var checkbox = document.getElementById(id);
+                    if (checkbox) checkbox.checked = Boolean(savedDraft.consents && savedDraft.consents[id]);
+                });
+                if (!requestedPackage && savedDraft.package) {
+                    selectedPackage = savedDraft.package;
+                    var savedCard = document.querySelector('.package-card[data-package="' + selectedPackage + '"]');
+                    if (savedCard) savedCard.classList.add('selected');
+                }
+                document.getElementById('draftRestoreNotice').style.display = 'block';
+            }
+        } catch (error) { localStorage.removeItem('pappasQuoteDraft'); }
+
+        document.getElementById('quoteForm').addEventListener('input', function() {
+            var fields = {};
+            ['firstName','lastName','phone','email','source','address','propertyType','frequency','preferredEstimateDate','alternateEstimateDate','notes'].forEach(function(id) {
+                var field = document.getElementById(id);
+                if (field) fields[id] = field.value;
+            });
+            var radios = {};
+            ['gate','dogs','lawnHeight','contactMethod','startTime','backyardAccess'].forEach(function(name) {
+                var checked = document.querySelector('input[name="' + name + '"]:checked');
+                if (checked) radios[name] = checked.value;
+            });
+            var services = Array.from(document.querySelectorAll('input[name="service"]:checked')).map(function(input) { return input.value; });
+            var consents = {};
+            ['consentTransactional', 'consentMarketing', 'consentTerms'].forEach(function(id) { consents[id] = document.getElementById(id).checked; });
+            localStorage.setItem('pappasQuoteDraft', JSON.stringify({ savedAt: Date.now(), fields: fields, radios: radios, services: services, consents: consents, package: selectedPackage }));
+        });
         
         // Phone formatting
         var phoneInput = document.getElementById('phone');
@@ -1010,6 +1066,7 @@
 
         function showSuccess() {
             goToStep(4);
+            localStorage.removeItem('pappasQuoteDraft');
 
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({ event: 'quote_request_submitted', service_count: servicesList.length, package: selectedPackage || 'none' });
