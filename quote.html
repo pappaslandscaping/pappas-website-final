@@ -99,9 +99,19 @@
                 <input type="hidden" name="package" id="selectedPackageValue" value="None">
                 <!-- Declares the combined service list so Netlify includes it in saved submissions and alerts. -->
                 <input type="hidden" name="services" value="">
+                <input type="hidden" name="landingPage" id="landingPage" value="">
+                <input type="hidden" name="referrer" id="referrer" value="">
+                <input type="hidden" name="utmSource" id="utmSource" value="">
+                <input type="hidden" name="utmMedium" id="utmMedium" value="">
+                <input type="hidden" name="utmCampaign" id="utmCampaign" value="">
                 <p hidden>
                     <label>Don't fill this out: <input name="bot-field"></label>
                 </p>
+                <div class="form-section" style="background:#f8faf9;border:1px solid #d1e0d8;">
+                    <h3>Already a customer?</h3>
+                    <p class="section-subtitle" style="margin-bottom:12px;">Use our service request form so your request connects directly to your HomeWorks customer profile.</p>
+                    <a href="/request-service" class="btn btn-secondary">Request Service as a Customer</a>
+                </div>
                 <!-- Step 1: Contact Info & Services -->
                 <div class="form-step active" data-step="1">
                     <div class="form-section">
@@ -155,6 +165,28 @@
                             <label for="address">Service Address <span class="required">*</span></label>
                             <input type="text" id="address" name="address" autocomplete="off" autocapitalize="words" required placeholder="Enter your service address">
                             <span class="error-message" id="addressError"></span>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="propertyType">Property Type</label>
+                                <select id="propertyType" name="propertyType">
+                                    <option value="Residential">Residential</option>
+                                    <option value="Commercial">Commercial</option>
+                                    <option value="Rental property">Rental property</option>
+                                    <option value="HOA or multi-family">HOA or multi-family</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="frequency">How often do you need service?</label>
+                                <select id="frequency" name="frequency">
+                                    <option value="One time">One time</option>
+                                    <option value="Weekly">Weekly</option>
+                                    <option value="Every two weeks">Every two weeks</option>
+                                    <option value="Monthly">Monthly</option>
+                                    <option value="Not sure">Not sure</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 
@@ -393,6 +425,28 @@
 
                         <div class="form-row">
                             <div class="form-group">
+                                <label for="preferredEstimateDate">Preferred estimate date (optional)</label>
+                                <input type="date" id="preferredEstimateDate" name="preferredEstimateDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="alternateEstimateDate">Alternate date (optional)</label>
+                                <input type="date" id="alternateEstimateDate" name="alternateEstimateDate">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Property photos (optional)</label>
+                            <p class="helper-text">Add up to three photos. This can help us prepare before we visit.</p>
+                            <div class="form-row">
+                                <input type="file" id="propertyPhoto1" name="propertyPhoto1" accept="image/jpeg,image/png,image/heic,image/webp">
+                                <input type="file" id="propertyPhoto2" name="propertyPhoto2" accept="image/jpeg,image/png,image/heic,image/webp">
+                            </div>
+                            <input type="file" id="propertyPhoto3" name="propertyPhoto3" accept="image/jpeg,image/png,image/heic,image/webp">
+                            <span class="error-message" id="photosError"></span>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
                                 <label>Is your lawn over 6 inches? <span class="required">*</span></label>
                                 <div class="radio-group">
                                     <label><input type="radio" name="lawnHeight" value="No" required> No</label>
@@ -480,6 +534,7 @@
                 <div class="footer-col">
                     <h4>Customer</h4>
                     <ul>
+                        <li><a href="/request-service">Request Service</a></li>
                         <li><a href="https://secure.copilotcrm.com/client/login/portal/5261" target="_blank">Client Portal</a></li>
                         <li><a href='/privacy'>Privacy Policy</a></li>
                         <li><a href='/terms'>Terms of Service</a></li>
@@ -623,6 +678,18 @@
     // Set up phone and name formatting when DOM is ready
     document.addEventListener('DOMContentLoaded', function() {
         console.log('Setting up phone and name formatting...');
+        var pageParams = new URLSearchParams(window.location.search);
+        document.getElementById('landingPage').value = window.location.pathname + window.location.search;
+        document.getElementById('referrer').value = document.referrer || '';
+        document.getElementById('utmSource').value = pageParams.get('utm_source') || '';
+        document.getElementById('utmMedium').value = pageParams.get('utm_medium') || '';
+        document.getElementById('utmCampaign').value = pageParams.get('utm_campaign') || '';
+        var requestedService = pageParams.get('service');
+        if (requestedService) {
+            document.querySelectorAll('input[name="service"]').forEach(function(input) {
+                if (input.value.toLowerCase() === requestedService.toLowerCase()) input.checked = true;
+            });
+        }
         
         // Phone formatting
         var phoneInput = document.getElementById('phone');
@@ -759,6 +826,10 @@
 
         if (!source) { showError('source', 'Please tell us how you found us'); valid = false; }
         if (!address) { showError('address', 'Service address is required'); valid = false; }
+        else if (/[,\s]Westlake\s*,?\s*OH(?:\s+\d{5})?\s*$/i.test(address)) {
+            showError('address', 'We are not currently accepting new work in Westlake.');
+            valid = false;
+        }
 
         // Check that at least a package or service is selected
         var services = document.querySelectorAll('input[name="service"]:checked');
@@ -876,6 +947,15 @@
 
         if (!validateStep3()) return;
 
+        var photoBytes = ['propertyPhoto1', 'propertyPhoto2', 'propertyPhoto3'].reduce(function(total, id) {
+            var input = document.getElementById(id);
+            return total + (input && input.files[0] ? input.files[0].size : 0);
+        }, 0);
+        if (photoBytes > 7.5 * 1024 * 1024) {
+            document.getElementById('photosError').textContent = 'Please choose smaller photos. The three photos must total less than 7.5 MB.';
+            return;
+        }
+
         var submitBtn = document.getElementById('submitBtn');
         submitBtn.disabled = true;
         submitBtn.textContent = 'Submitting...';
@@ -901,7 +981,14 @@
             phone: document.getElementById('phone').value.trim(),
             email: document.getElementById('email').value.trim(),
             source: document.getElementById('source').value,
+            landingPage: document.getElementById('landingPage').value,
+            referrer: document.getElementById('referrer').value,
+            utmSource: document.getElementById('utmSource').value,
+            utmMedium: document.getElementById('utmMedium').value,
+            utmCampaign: document.getElementById('utmCampaign').value,
             address: document.getElementById('address').value.trim(),
+            propertyType: document.getElementById('propertyType').value,
+            frequency: document.getElementById('frequency').value,
             package: selectedPackage ? (selectedPackage.charAt(0).toUpperCase() + selectedPackage.slice(1)) + ' Care' : 'None',
             services: servicesList.join(', ') || 'None',
             gate: getRadio('gate'),
@@ -910,14 +997,22 @@
             contactMethod: getRadio('contactMethod'),
             startTime: getRadio('startTime'),
             backyardAccess: getRadio('backyardAccess'),
+            preferredEstimateDate: document.getElementById('preferredEstimateDate').value,
+            alternateEstimateDate: document.getElementById('alternateEstimateDate').value,
             notes: document.getElementById('notes').value.trim(),
             consentTransactional: document.getElementById('consentTransactional').checked,
             consentMarketing: document.getElementById('consentMarketing').checked,
             consentTerms: document.getElementById('consentTerms').checked
         };
+        formData.photos = ['propertyPhoto1', 'propertyPhoto2', 'propertyPhoto3']
+            .map(function(id) { var input = document.getElementById(id); return input && input.files[0] ? input.files[0].name : ''; })
+            .filter(Boolean);
 
         function showSuccess() {
             goToStep(4);
+
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: 'quote_request_submitted', service_count: servicesList.length, package: selectedPackage || 'none' });
 
             var progressBar = document.querySelector('.progress-bar');
             if (progressBar) progressBar.style.display = 'none';
@@ -932,16 +1027,15 @@
 
         // Netlify Forms is the durable first stop for every request and sends the office alert.
         function submitToNetlify() {
-            var netlifyData = new URLSearchParams();
-            netlifyData.append('form-name', 'quote-request');
+            var netlifyData = new FormData(document.getElementById('quoteForm'));
+            netlifyData.set('form-name', 'quote-request');
             Object.keys(formData).forEach(function(key) {
-                netlifyData.append(key, String(formData[key]));
+                if (key !== 'photos') netlifyData.set(key, String(formData[key]));
             });
 
             return fetch('/', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: netlifyData.toString()
+                body: netlifyData
             }).then(function(response) {
                 if (!response.ok) throw new Error('Netlify form error: ' + response.status);
             });
