@@ -77,8 +77,5 @@ jobs:
         env:
           HEALTHCHECK_URL: ${{ vars.HEALTHCHECK_URL }}
         run: |
-          if [ -z "$HEALTHCHECK_URL" ]; then
-            echo "::notice::Set repository variable HEALTHCHECK_URL to enable the production probe."
-            exit 0
-          fi
+          HEALTHCHECK_URL="${HEALTHCHECK_URL:-https://pappaslandscaping.com/}"
           curl --fail --silent --show-error --retry 3 --retry-all-errors --max-time 20 "$HEALTHCHECK_URL" > /dev/null
