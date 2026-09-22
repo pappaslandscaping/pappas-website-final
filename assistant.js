@@ -61,7 +61,7 @@
     '    </form>',
     '    <p class="pa-lead-alternative">Prefer the full form? <a href="/quote">Open the quote page</a>.</p>',
     '  </div>',
-    '  <footer class="pa-footer">AI assistant · No payment details in chat · <a href="/privacy">Privacy</a> · <a href="tel:4408867318">Call us</a></footer>',
+    '  <footer class="pa-footer">Chats are saved for our team · No payment details · <a href="/privacy">Privacy</a> · <a href="tel:4408867318">Call us</a></footer>',
     '</section>'
   ].join('');
   document.body.appendChild(root);
@@ -83,8 +83,44 @@
   var waiting = false;
   var liveChat = null;
   var liveMessageIds = {};
+  var loggingWarningShown = false;
   var chatApi = 'https://pappas-quote-backend-production.up.railway.app/api/site-chat';
   try { liveChat = JSON.parse(sessionStorage.getItem('pappasLiveChat') || 'null'); } catch (_) { liveChat = null; }
+  if (liveChat && !liveChat.mode) liveChat.mode = 'human';
+
+  function saveChat() {
+    if (liveChat) sessionStorage.setItem('pappasLiveChat', JSON.stringify(liveChat));
+  }
+
+  async function appendToChat(sender, message) {
+    if (!liveChat) throw new Error('No chat session');
+    var response = await fetch(chatApi + '/' + liveChat.id + '/messages', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'x-chat-token': liveChat.token },
+      body: JSON.stringify({ sender: sender, message: message })
+    });
+    var data = await response.json().catch(function () { return {}; });
+    if (!response.ok || !data.success) throw new Error(data.error || 'Chat could not be saved');
+    return data.message;
+  }
+
+  async function recordAiQuestion(question) {
+    if (liveChat) {
+      var saved = await appendToChat('visitor', question);
+      liveMessageIds[saved.id] = true;
+      return;
+    }
+    var recaptchaToken = await getRecaptchaToken('site_chat').catch(function () { return null; });
+    var response = await fetch(chatApi, {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ mode: 'assistant', message: question, recaptchaToken: recaptchaToken })
+    });
+    var data = await response.json().catch(function () { return {}; });
+    if (!response.ok || !data.success) throw new Error(data.error || 'Chat could not be saved');
+    liveChat = { id: data.id, token: data.token, mode: 'assistant' };
+    liveMessageIds[data.messageId] = true;
+    saveChat();
+  }
 
   function setOpen(open) {
     panel.hidden = !open;
@@ -102,8 +138,12 @@
     messagesEl.scrollTop = messagesEl.scrollHeight;
   }
 
-  function addAccountHelp() {
-    addMessage('bot', 'For your schedule, invoices, payments, and account details, please sign in to the secure customer portal. You can also call us at (440) 886-7318.');
+  async function addAccountHelp() {
+    if (liveChat && liveChat.mode === 'human') {
+      addMessage('bot', 'For account details, please sign in to the secure customer portal or call us at (440) 886-7318.');
+    } else {
+      await ask('How do I access my schedule, invoices, and payments?');
+    }
     var link = document.createElement('a');
     link.className = 'pa-portal-link';
     link.href = 'https://secure.copilotcrm.com/client/login/portal/5261';
@@ -115,7 +155,7 @@
   }
 
   async function ask(question) {
-    if (liveChat) return sendLiveMessage(question);
+    if (liveChat && liveChat.mode === 'human') return sendLiveMessage(question);
     if (waiting || !question) return;
     waiting = true;
     questionInput.disabled = true;
@@ -129,6 +169,13 @@
     messagesEl.appendChild(pending);
     messagesEl.scrollTop = messagesEl.scrollHeight;
     try {
+      try { await recordAiQuestion(question); }
+      catch (_) {
+        if (!loggingWarningShown) {
+          loggingWarningShown = true;
+          addMessage('bot', 'Team notifications are temporarily unavailable. Please call us if you need a person.');
+        }
+      }
       var response = await fetch('/api/site-assistant', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
@@ -136,9 +183,17 @@
       });
       var result = await response.json().catch(function () { return {}; });
       if (!response.ok || !result.answer) throw new Error('unavailable');
+      if (liveChat && liveChat.mode === 'assistant') await pollLiveChat();
+      if (liveChat && liveChat.mode === 'human') { pending.remove(); return; }
       pending.remove();
       addMessage('bot', result.answer);
       history.push({ role: 'assistant', content: result.answer.slice(0, 1200) });
+      if (liveChat && liveChat.mode === 'assistant') {
+        try {
+          var savedAnswer = await appendToChat('assistant', result.answer.slice(0, 1200));
+          liveMessageIds[savedAnswer.id] = true;
+        } catch (_) { /* The answer remains visible even if its transcript cannot be saved. */ }
+      }
     } catch (error) {
       pending.remove();
       history.pop();
@@ -167,7 +222,7 @@
   }
 
   function showHuman() {
-    if (liveChat) { showChat(); return; }
+    if (liveChat && liveChat.mode === 'human') { showChat(); return; }
     chatView.hidden = true;
     leadView.hidden = true;
     humanView.hidden = false;
@@ -186,10 +241,21 @@
       }
       if (!response.ok) return;
       var data = await response.json();
+      if (data.mode === 'human' && liveChat.mode !== 'human') {
+        liveChat.mode = 'human';
+        questionInput.placeholder = 'Message our team...';
+        saveChat();
+        addMessage('bot', 'A team member has joined this chat. Your next message will go to our team.');
+      }
+      if (!history.length && data.mode === 'assistant') {
+        history = (data.messages || []).filter(function (item) { return item.sender === 'visitor' || item.sender === 'assistant'; }).slice(-8).map(function (item) {
+          return { role: item.sender === 'visitor' ? 'user' : 'assistant', content: item.body };
+        });
+      }
       (data.messages || []).forEach(function (item) {
         if (liveMessageIds[item.id]) return;
         liveMessageIds[item.id] = true;
-        addMessage(item.sender === 'visitor' ? 'user' : 'bot', item.body);
+        addMessage(item.sender === 'visitor' ? 'user' : 'bot', item.sender === 'staff' ? 'Pappas team: ' + item.body : item.body);
       });
       if (data.status === 'closed' && !liveChat.closed) {
         liveChat.closed = true;
@@ -204,12 +270,7 @@
     if (!liveChat || waiting) return;
     waiting = true;
     try {
-      var response = await fetch(chatApi + '/' + liveChat.id + '/messages', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json', 'x-chat-token': liveChat.token },
-        body: JSON.stringify({ message: message })
-      });
-      if (!response.ok) throw new Error('send failed');
+      await appendToChat('visitor', message);
       await pollLiveChat();
     } catch (_) { addMessage('bot', 'Your message did not send. Please try again or call (440) 886-7318.'); }
     finally { waiting = false; }
@@ -245,7 +306,7 @@
     var question = questionInput.value.trim();
     if (!question) return;
     questionInput.value = '';
-    if (!liveChat && /(?:\b(?:talk|speak|chat)\b.*\b(?:person|human|someone|representative|team)\b|\bcustomer service\b|\blive agent\b)/i.test(question)) {
+    if ((!liveChat || liveChat.mode === 'assistant') && /(?:\b(?:talk|speak|chat)\b.*\b(?:person|human|someone|representative|team)\b|\bcustomer service\b|\blive agent\b)/i.test(question)) {
       showHuman();
       humanForm.elements.message.value = question;
       return;
@@ -269,21 +330,24 @@
     submit.disabled = true;
     try {
       var form = new FormData(humanForm);
-      var recaptchaToken = await getRecaptchaToken('site_chat').catch(function () { return null; });
-      var response = await fetch(chatApi, {
-        method: 'POST', headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ name: String(form.get('name') || '').trim(), contact: String(form.get('contact') || '').trim(), message: String(form.get('message') || '').trim(), website: String(form.get('website') || ''), recaptchaToken: recaptchaToken })
-      });
+      var payload = { name: String(form.get('name') || '').trim(), contact: String(form.get('contact') || '').trim(), message: String(form.get('message') || '').trim(), website: String(form.get('website') || '') };
+      var handoff = liveChat && liveChat.mode === 'assistant';
+      var url = handoff ? chatApi + '/' + liveChat.id + '/handoff' : chatApi;
+      var headers = { 'content-type': 'application/json' };
+      if (handoff) headers['x-chat-token'] = liveChat.token;
+      else payload.recaptchaToken = await getRecaptchaToken('site_chat').catch(function () { return null; });
+      var response = await fetch(url, { method: 'POST', headers: headers, body: JSON.stringify(payload) });
       var data = await response.json().catch(function () { return {}; });
       if (!response.ok || !data.success) throw new Error(data.error || 'We couldn’t send your message. Please call us instead.');
-      liveChat = { id: data.id, token: data.token };
-      sessionStorage.setItem('pappasLiveChat', JSON.stringify(liveChat));
+      if (handoff) liveChat.mode = 'human';
+      else liveChat = { id: data.id, token: data.token, mode: 'human' };
+      saveChat();
       humanForm.reset();
       showChat();
       questionInput.placeholder = 'Message our team...';
       addMessage('bot', data.afterHours
         ? 'Thanks. We received your message after hours. We’ll reply during business hours and can use the contact information you provided if you close this page.'
-        : data.alerted
+        : (data.alerted || data.alreadyAlerted)
           ? 'Thanks. We alerted our team and will reply here when someone is available.'
           : 'Thanks. Your message is in our team inbox. You can keep this chat open for a reply or call (440) 886-7318.');
       await pollLiveChat();
