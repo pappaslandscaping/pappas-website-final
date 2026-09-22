@@ -120,6 +120,7 @@
     liveChat = { id: data.id, token: data.token, mode: 'assistant' };
     liveMessageIds[data.messageId] = true;
     saveChat();
+    if (window.PappasAnalytics) window.PappasAnalytics.track('chat_started', { chat_type: 'assistant' });
   }
 
   function setOpen(open) {
@@ -352,6 +353,9 @@
       if (handoff) liveChat.mode = 'human';
       else liveChat = { id: data.id, token: data.token, mode: 'human' };
       saveChat();
+      if (window.PappasAnalytics) {
+        window.PappasAnalytics.track(handoff ? 'human_handoff' : 'chat_started', { chat_type: 'human' });
+      }
       humanForm.reset();
       showChat();
       questionInput.placeholder = 'Message our team...';
@@ -405,6 +409,7 @@
       });
       var result = await response.json().catch(function () { return {}; });
       if (!response.ok || !result.success) throw new Error('Quote request could not be saved');
+      if (window.PappasAnalytics) window.PappasAnalytics.track('generate_lead', { form_type: 'assistant_quote' });
       leadForm.reset();
       showChat();
       addMessage('bot', 'Thanks—your quote request was sent to our team. We’ll review your property details and follow up.');
