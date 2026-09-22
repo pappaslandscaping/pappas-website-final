@@ -21,6 +21,7 @@
       gtag('js', new Date());
       gtag('config', 'G-G3K6X5HFBW');
     </script>
+    <script src="analytics-events.js" defer></script>
 </head>
 <body>
     <!-- Top Contact Bar -->
@@ -1075,8 +1076,12 @@
             goToStep(4);
             localStorage.removeItem('pappasQuoteDraft');
 
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({ event: 'quote_request_submitted', service_count: servicesList.length, package: selectedPackage || 'none' });
+            if (window.PappasAnalytics) {
+                window.PappasAnalytics.track('generate_lead', {
+                    form_type: 'full_quote',
+                    service_count: servicesList.length
+                });
+            }
 
             var progressBar = document.querySelector('.progress-bar');
             if (progressBar) progressBar.style.display = 'none';
