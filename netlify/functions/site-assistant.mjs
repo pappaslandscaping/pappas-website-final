@@ -134,14 +134,14 @@ export default async function siteAssistant(request) {
     });
     if (!response.ok) {
       console.error("Website assistant provider error", response.status);
-      return json({ error: "Assistant is temporarily unavailable" }, 502);
+      return json({ error: "Assistant is temporarily unavailable", diagnostic: `provider_${response.status}` }, 502);
     }
     const answer = outputText(await response.json());
     if (!answer) return json({ error: "Assistant is temporarily unavailable" }, 502);
     return json({ answer });
   } catch (error) {
     console.error("Website assistant request failed", error?.name || "Error");
-    return json({ error: "Assistant is temporarily unavailable" }, 502);
+    return json({ error: "Assistant is temporarily unavailable", diagnostic: error?.name || "request_error" }, 502);
   }
 }
 
