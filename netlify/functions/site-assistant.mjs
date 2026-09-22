@@ -41,6 +41,43 @@ function outputText(response) {
     .trim();
 }
 
+// Keep the public catalog useful in previews and during a provider outage.
+// These answers come from the same reviewed HomeWorks items listed above.
+function catalogAnswer(question) {
+  const q = question.toLowerCase().replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
+  if (/\b(invoice|bill|payment|balance|account|next visit|scheduled visit)\b/.test(q) || /\bmy schedule\b/.test(q)) {
+    return "For your schedule, invoices, payments, and account details, use the My account button below to open the secure customer portal, or call us at (440) 886-7318. Please don't share passwords or payment details in chat.";
+  }
+  if (/\b(price|cost|rate|charge|how much)\b/.test(q)) {
+    return "Pricing depends on your property and the scope of work. Use Get a quote below and our team will follow up with a custom quote.";
+  }
+  if (/\b(fall|autumn|leaf|leaves)\b/.test(q) && /\b(clean|cleanup|cleanups|leaves|leaf|include|service)\b/.test(q)) {
+    return "Our fall cleanup covers weekly leaf removal from lawns and landscape areas, typically from late October through November and sometimes into early December depending on weather. We also remove branches and seasonal debris and haul away what we collect. The team will confirm the schedule and scope for your property in a quote.";
+  }
+  if (/\b(snow|plow|plowing)\b/.test(q)) {
+    return "Our snow removal service clears driveways after a qualifying snowfall based on the property's trigger depth. Timing depends on the storm, accumulation, route conditions, and safe access. Deicing or follow-up service may be additional, so the team can confirm the details for your property.";
+  }
+  if (/\b(spring)\b/.test(q) && /\b(clean|cleanup|cleanups|include|service)\b/.test(q)) {
+    return "Spring cleanup removes leaves, branches, and dead plant material from beds and clears thatch, dead grass, acorns, and small sticks from lawn areas. We trim back overgrown perennials as needed. Mulch installation can be added separately.";
+  }
+  if (/\b(mow|mowing|lawn maintenance|grass cutting)\b/.test(q)) {
+    return "Weekly mowing includes cutting the lawn at a suitable seasonal height, trimming around trees, beds, and paths, and cleaning clippings and hard surfaces. Concrete edging is available as an add-on.";
+  }
+  if (/\b(mulch|mulching)\b/.test(q)) {
+    return "Mulching includes preparing the beds, spreading fresh mulch evenly without piling it around plants or trees, and applying Snapshot Weed Preventer. Bed edging can be added separately. The team will confirm the scope in your quote.";
+  }
+  if (/\b(aerat|aeration|soil compaction)\b/.test(q)) {
+    return "Core aeration removes small soil cores from open turf to relieve compaction and help water, air, and nutrients reach the roots. Overseeding can be added at the same visit.";
+  }
+  if (/\b(shrub|hedge|pruning|trimming)\b/.test(q)) {
+    return "Shrub trimming cuts back dead, overgrown, or uneven growth and includes collecting and removing the trimmings. It can be scheduled per visit or as part of a recurring maintenance plan.";
+  }
+  if (/\b(service|services|offer)\b/.test(q) && /\b(what|which|list|offer)\b/.test(q)) {
+    return "We can help with mowing, spring and fall cleanups, mulching, core aeration, shrub trimming, and snow removal. The website also lists fertilization and weed control. Tell me which service you're interested in, or request a property quote for a confirmed scope and price.";
+  }
+  return null;
+}
+
 export default async function siteAssistant(request) {
   if (request.method !== "POST") return json({ error: "Method not allowed" }, 405);
 
@@ -69,6 +106,9 @@ export default async function siteAssistant(request) {
   )) {
     return json({ error: "Invalid message" }, 400);
   }
+
+  const knownAnswer = catalogAnswer(messages.at(-1).content);
+  if (knownAnswer) return json({ answer: knownAnswer });
 
   const apiKey = Netlify.env.get("OPENAI_API_KEY");
   if (!apiKey) return json({ error: "Assistant is temporarily unavailable" }, 503);
