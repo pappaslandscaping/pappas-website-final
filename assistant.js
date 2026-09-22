@@ -185,15 +185,22 @@
       if (!response.ok || !result.answer) throw new Error('unavailable');
       if (liveChat && liveChat.mode === 'assistant') await pollLiveChat();
       if (liveChat && liveChat.mode === 'human') { pending.remove(); return; }
-      pending.remove();
-      addMessage('bot', result.answer);
-      history.push({ role: 'assistant', content: result.answer.slice(0, 1200) });
       if (liveChat && liveChat.mode === 'assistant') {
         try {
           var savedAnswer = await appendToChat('assistant', result.answer.slice(0, 1200));
           liveMessageIds[savedAnswer.id] = true;
-        } catch (_) { /* The answer remains visible even if its transcript cannot be saved. */ }
+        } catch (_) {
+          await pollLiveChat();
+          if (liveChat && liveChat.mode === 'human') { pending.remove(); return; }
+          if (!loggingWarningShown) {
+            loggingWarningShown = true;
+            addMessage('bot', 'Team notifications are temporarily unavailable. Please call us if you need a person.');
+          }
+        }
       }
+      pending.remove();
+      addMessage('bot', result.answer);
+      history.push({ role: 'assistant', content: result.answer.slice(0, 1200) });
     } catch (error) {
       pending.remove();
       history.pop();
