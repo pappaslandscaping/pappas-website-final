@@ -25,11 +25,23 @@
     '      <button type="button" data-action="area">Service area</button>',
     '      <button type="button" data-action="quote">Get a quote</button>',
     '      <button type="button" data-action="account">My account</button>',
+    '      <button type="button" data-action="person">Talk to a person</button>',
     '    </div>',
     '    <form class="pa-message-form">',
     '      <label class="pa-sr-only" for="pa-question">Ask a question</label>',
     '      <input id="pa-question" name="question" maxlength="1200" placeholder="Ask about our services..." required>',
     '      <button type="submit" aria-label="Send question">Send</button>',
+    '    </form>',
+    '  </div>',
+    '  <div class="pa-human-view" hidden>',
+    '    <div class="pa-lead-heading"><button class="pa-human-back" type="button">← Chat</button><strong>Talk to our team</strong></div>',
+    '    <p>Send a message and we’ll reply here when someone is available. Leave a phone number or email so we can follow up if you close this page. Office hours: Mon–Fri 9–6, Sat 9–4, Sun closed (Eastern).</p>',
+    '    <form class="pa-human-form">',
+    '      <label>Your name<input name="name" autocomplete="name" maxlength="80" required></label>',
+    '      <label>Phone or email<input name="contact" maxlength="160" required></label>',
+    '      <label>How can we help?<textarea name="message" rows="3" maxlength="1200" required></textarea></label>',
+    '      <p class="pa-human-error" role="alert" hidden></p>',
+    '      <button class="pa-submit-lead" type="submit">Send to our team</button>',
     '    </form>',
     '  </div>',
     '  <div class="pa-lead-view" hidden>',
@@ -58,6 +70,9 @@
   var close = root.querySelector('.pa-close');
   var chatView = root.querySelector('.pa-chat-view');
   var leadView = root.querySelector('.pa-lead-view');
+  var humanView = root.querySelector('.pa-human-view');
+  var humanForm = root.querySelector('.pa-human-form');
+  var humanError = root.querySelector('.pa-human-error');
   var messagesEl = root.querySelector('.pa-messages');
   var messageForm = root.querySelector('.pa-message-form');
   var questionInput = root.querySelector('#pa-question');
@@ -65,12 +80,16 @@
   var leadError = root.querySelector('.pa-lead-error');
   var history = [];
   var waiting = false;
+  var liveChat = null;
+  var liveMessageIds = {};
+  var chatApi = 'https://pappas-quote-backend-production.up.railway.app/api/site-chat';
+  try { liveChat = JSON.parse(sessionStorage.getItem('pappasLiveChat') || 'null'); } catch (_) { liveChat = null; }
 
   function setOpen(open) {
     panel.hidden = !open;
     launcher.setAttribute('aria-expanded', String(open));
     launcher.setAttribute('aria-label', open ? 'Close Pappas assistant' : 'Open Pappas assistant');
-    if (open) (leadView.hidden ? questionInput : leadForm.elements.firstName).focus();
+    if (open) (humanView.hidden ? (leadView.hidden ? questionInput : leadForm.elements.firstName) : humanForm.elements.name).focus();
     else launcher.focus();
   }
 
@@ -95,6 +114,7 @@
   }
 
   async function ask(question) {
+    if (liveChat) return sendLiveMessage(question);
     if (waiting || !question) return;
     waiting = true;
     questionInput.disabled = true;
@@ -132,6 +152,7 @@
 
   function showLead(service) {
     chatView.hidden = true;
+    humanView.hidden = true;
     leadView.hidden = false;
     if (service) leadForm.elements.service.value = service;
     leadForm.elements.firstName.focus();
@@ -139,17 +160,67 @@
 
   function showChat() {
     leadView.hidden = true;
+    humanView.hidden = true;
     chatView.hidden = false;
     questionInput.focus();
   }
 
-  function getRecaptchaToken() {
+  function showHuman() {
+    if (liveChat) { showChat(); return; }
+    chatView.hidden = true;
+    leadView.hidden = true;
+    humanView.hidden = false;
+    humanForm.elements.name.focus();
+  }
+
+  async function pollLiveChat() {
+    if (!liveChat || document.hidden) return;
+    try {
+      var response = await fetch(chatApi + '/' + liveChat.id, { headers: { 'x-chat-token': liveChat.token } });
+      if (response.status === 404) {
+        liveChat = null;
+        sessionStorage.removeItem('pappasLiveChat');
+        addMessage('bot', 'This conversation has expired. Please start a new request to reach our team.');
+        return;
+      }
+      if (!response.ok) return;
+      var data = await response.json();
+      (data.messages || []).forEach(function (item) {
+        if (liveMessageIds[item.id]) return;
+        liveMessageIds[item.id] = true;
+        addMessage(item.sender === 'visitor' ? 'user' : 'bot', item.body);
+      });
+      if (data.status === 'closed' && !liveChat.closed) {
+        liveChat.closed = true;
+        addMessage('bot', 'Our team has closed this conversation. You can start another chat if you need anything else.');
+        sessionStorage.removeItem('pappasLiveChat');
+        liveChat = null;
+      }
+    } catch (_) { /* A later poll will retry. */ }
+  }
+
+  async function sendLiveMessage(message) {
+    if (!liveChat || waiting) return;
+    waiting = true;
+    try {
+      var response = await fetch(chatApi + '/' + liveChat.id + '/messages', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'x-chat-token': liveChat.token },
+        body: JSON.stringify({ message: message })
+      });
+      if (!response.ok) throw new Error('send failed');
+      await pollLiveChat();
+    } catch (_) { addMessage('bot', 'Your message did not send. Please try again or call (440) 886-7318.'); }
+    finally { waiting = false; }
+  }
+
+  function getRecaptchaToken(action) {
     var siteKey = '6LeNqnQsAAAAAGgwOp8QUnjq6U8HZNoC1tVFTTV3';
     return new Promise(function (resolve, reject) {
       function run() {
         if (!window.grecaptcha || !window.grecaptcha.execute) return reject(new Error('Verification unavailable'));
         window.grecaptcha.ready(function () {
-          window.grecaptcha.execute(siteKey, { action: 'quote_request' }).then(resolve, reject);
+          window.grecaptcha.execute(siteKey, { action: action || 'quote_request' }).then(resolve, reject);
         });
       }
       if (window.grecaptcha && window.grecaptcha.execute) return run();
@@ -164,6 +235,7 @@
   launcher.addEventListener('click', function () { setOpen(panel.hidden); });
   close.addEventListener('click', function () { setOpen(false); });
   root.querySelector('.pa-back').addEventListener('click', showChat);
+  root.querySelector('.pa-human-back').addEventListener('click', showChat);
   document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape' && !panel.hidden) setOpen(false);
   });
@@ -172,6 +244,11 @@
     var question = questionInput.value.trim();
     if (!question) return;
     questionInput.value = '';
+    if (!liveChat && /(?:\b(?:talk|speak|chat)\b.*\b(?:person|human|someone|representative|team)\b|\bcustomer service\b|\blive agent\b)/i.test(question)) {
+      showHuman();
+      humanForm.elements.message.value = question;
+      return;
+    }
     ask(question);
   });
   root.querySelectorAll('.pa-actions button').forEach(function (button) {
@@ -180,7 +257,39 @@
       if (button.dataset.action === 'area') ask('What areas do you serve?');
       if (button.dataset.action === 'quote') showLead('');
       if (button.dataset.action === 'account') addAccountHelp();
+      if (button.dataset.action === 'person') showHuman();
     });
+  });
+
+  humanForm.addEventListener('submit', async function (event) {
+    event.preventDefault();
+    humanError.hidden = true;
+    var submit = humanForm.querySelector('button[type="submit"]');
+    submit.disabled = true;
+    try {
+      var form = new FormData(humanForm);
+      var recaptchaToken = await getRecaptchaToken('site_chat');
+      var response = await fetch(chatApi, {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ name: String(form.get('name') || '').trim(), contact: String(form.get('contact') || '').trim(), message: String(form.get('message') || '').trim(), recaptchaToken: recaptchaToken })
+      });
+      var data = await response.json().catch(function () { return {}; });
+      if (!response.ok || !data.success) throw new Error(data.error || 'We couldn’t send your message. Please call us instead.');
+      liveChat = { id: data.id, token: data.token };
+      sessionStorage.setItem('pappasLiveChat', JSON.stringify(liveChat));
+      humanForm.reset();
+      showChat();
+      questionInput.placeholder = 'Message our team...';
+      addMessage('bot', data.afterHours
+        ? 'Thanks. We received your message after hours. We’ll reply during business hours and can use the contact information you provided if you close this page.'
+        : data.alerted
+          ? 'Thanks. We alerted our team and will reply here when someone is available.'
+          : 'Thanks. Your message is in our team inbox. You can keep this chat open for a reply or call (440) 886-7318.');
+      await pollLiveChat();
+    } catch (error) {
+      humanError.textContent = error.message;
+      humanError.hidden = false;
+    } finally { submit.disabled = false; }
   });
 
   leadForm.addEventListener('submit', async function (event) {
@@ -233,5 +342,7 @@
     }
   });
 
-  addMessage('bot', 'Hi! I can help with services and quote requests. For your schedule or invoices, I’ll point you to the secure customer portal.');
+  addMessage('bot', 'Hi! I can help with services and quote requests. You can also ask to talk to our team. For your schedule or invoices, I’ll point you to the secure customer portal.');
+  if (liveChat) { questionInput.placeholder = 'Message our team...'; pollLiveChat(); }
+  setInterval(pollLiveChat, 5000);
 })();

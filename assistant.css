@@ -80,12 +80,18 @@
 .pa-message-form button, .pa-submit-lead { border: 0; border-radius: 9px; background: var(--pa-green); color: #fff; padding: 10px 13px; font-weight: 700; }
 .pa-message-form button:hover, .pa-submit-lead:hover { background: var(--pa-dark); }
 
-.pa-lead-view { flex: 1; min-height: 0; overflow: auto; padding: 15px 16px; background: #fcfdf9; }
+.pa-lead-view, .pa-human-view { flex: 1; min-height: 0; overflow: auto; padding: 15px 16px; background: #fcfdf9; }
 .pa-lead-heading { display: flex; align-items: center; gap: 12px; }
 .pa-lead-heading strong { font-size: 17px; }
 .pa-back { border: 0; background: none; color: #315e47; padding: 5px 0; font-weight: 700; }
 .pa-lead-view > p { margin: 10px 0 14px; line-height: 1.45; }
 .pa-lead-form { display: grid; gap: 10px; }
+.pa-human-form { display: grid; gap: 10px; }
+.pa-human-view > p { margin: 10px 0 14px; line-height: 1.45; }
+.pa-human-back { border: 0; background: none; color: #315e47; padding: 5px 0; font-weight: 700; }
+.pa-human-form label { display: block; font-size: 12px; font-weight: 700; }
+.pa-human-form input, .pa-human-form textarea { display: block; width: 100%; margin-top: 5px; border: 1px solid #bdcbb8; border-radius: 8px; padding: 9px 10px; background: #fff; color: var(--pa-dark); font-size: 14px; }
+.pa-human-error { color: #9c2626; line-height: 1.4; }
 .pa-lead-form label { display: block; font-size: 12px; font-weight: 700; }
 .pa-lead-form label span { font-weight: 400; }
 .pa-lead-form input:not([type=checkbox]), .pa-lead-form select, .pa-lead-form textarea { display: block; width: 100%; margin-top: 5px; border: 1px solid #bdcbb8; border-radius: 8px; padding: 9px 10px; background: #fff; color: var(--pa-dark); font-size: 14px; }
