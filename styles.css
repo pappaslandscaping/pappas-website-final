@@ -338,6 +338,19 @@ nav.scrolled .logo-img {
     z-index: 3;
 }
 
+.hero-seasonal-note {
+    display: inline-block;
+    margin: 0 0 1.25rem;
+    padding: 0.55rem 1rem;
+    border: 1px solid rgba(201, 221, 128, 0.7);
+    border-radius: 999px;
+    background: rgba(46, 64, 61, 0.8);
+    color: var(--yellow);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
 .hero-title {
     font-size: 2.5rem;
     color: white;
