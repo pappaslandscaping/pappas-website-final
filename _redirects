@@ -1,2 +1,21 @@
+# Keep links without .html working while consolidating search signals.
+/index.html / 301!
+/about /about.html 301!
+/blog /blog.html 301!
+/blog/5-signs-lawn-needs-professional-help /blog/5-signs-lawn-needs-professional-help.html 301!
+/blog/best-time-fertilize-northeast-ohio /blog/best-time-fertilize-northeast-ohio.html 301!
+/blog/crabgrass-guide-cleveland /blog/crabgrass-guide-cleveland.html 301!
+/blog/mulch-101-cleveland-homeowners-guide /blog/mulch-101-cleveland-homeowners-guide.html 301!
+/blog/spring-cleanup-checklist-cleveland /blog/spring-cleanup-checklist-cleveland.html 301!
+/blog/spring-weed-control-cleveland /blog/spring-weed-control-cleveland.html 301!
+/blog/when-to-aerate-lawn-ohio /blog/when-to-aerate-lawn-ohio.html 301!
+/contact /contact.html 301!
+/faq /faq.html 301!
+/privacy /privacy.html 301!
+/quote /quote.html 301!
+/request-service /request-service.html 301!
+/reviews /reviews.html 301!
+/services /services.html 301!
+/terms /terms.html 301!
 http://pappaslandscaping.com/* https://pappaslandscaping.com/:splat 301!
 http://www.pappaslandscaping.com/* https://www.pappaslandscaping.com/:splat 301!
