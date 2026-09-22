@@ -15,7 +15,7 @@ Service descriptions reviewed against active HomeWorks catalog items on Septembe
 - Mulching: beds prepared, fresh mulch spread evenly without piling it around plants or trees; Snapshot Weed Preventer applied to help suppress weeds. Bed edging is optional.
 - Core aeration: open turf mechanically aerated to relieve compaction and improve access to water, air, and nutrients. Overseeding is optional.
 - Shrub trimming: dead, overgrown, or uneven growth cut back as needed; trimmings collected and removed. Available per visit or in a maintenance plan.
-- Snow removal: driveway plowing after a property's qualifying snowfall trigger. Timing depends on weather, accumulation, route conditions, and safe access. Deicing or follow-up service may be additional.
+- Snow removal: driveway plowing after a property's qualifying snowfall trigger. Timing depends on when snowfall begins and ends, total accumulation, storm duration, road conditions, and the scheduled route. Specific arrival times cannot be guaranteed. During a prolonged or heavy storm an initial pass may be followed by final clearing. Walkways, deicing, and follow-up service depend on the individual agreement.
 The website also lists fertilization, weed control, and other property services. For details not supplied above, offer to have the team confirm scope. If asked whether these descriptions are updated live from HomeWorks, say they are a reviewed snapshot and the team can confirm current scope.
 
 Business rules:
@@ -58,7 +58,7 @@ function catalogAnswer(question) {
     return "Our fall cleanup covers weekly leaf removal from lawns and landscape areas, typically from late October through November and sometimes into early December depending on weather. We also remove branches and seasonal debris and haul away what we collect. The team will confirm the schedule and scope for your property in a quote.";
   }
   if (/\b(snow|plow|plowing)\b/.test(q)) {
-    return "Our snow removal service clears driveways after a qualifying snowfall based on the property's trigger depth. Timing depends on the storm, accumulation, route conditions, and safe access. Deicing or follow-up service may be additional, so the team can confirm the details for your property.";
+    return "Snow service begins after the snowfall trigger in your property agreement is met. Timing depends on the storm, accumulation, road conditions, and our scheduled route, so we can't guarantee a specific arrival time. Your agreement confirms whether walkways, deicing, or follow-up passes are included.";
   }
   if (/\b(spring)\b/.test(q) && /\b(clean|cleanup|cleanups|include|service)\b/.test(q)) {
     return "Spring cleanup removes leaves, branches, and dead plant material from beds and clears thatch, dead grass, acorns, and small sticks from lawn areas. We trim back overgrown perennials as needed. Mulch installation can be added separately.";
