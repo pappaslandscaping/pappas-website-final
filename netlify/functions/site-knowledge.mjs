@@ -6,7 +6,8 @@ export const WEBSITE_CONTEXT = `
 Website and company information:
 - Pappas & Co. Landscaping is a family-owned Cleveland-area landscaping company. Tim Pappas is the owner and founder. He began working in lawn care in 2004 and has more than 20 years of experience. Theresa Pappas is the office manager and handles scheduling and customer care. Chris is a crew leader, and Aidan helps when home from college. Source: About page.
 - Current service area, confirmed directly by the owner: Lakewood, Brook Park, Bay Village, and the west side of Cleveland only. A Cleveland city name alone is not enough to confirm coverage; ask for the property address so the team can check which side of Cleveland it is. Other cities, including Westlake, Rocky River, North Olmsted, Fairview Park, and Parma, are outside the current service area. This owner policy supersedes older website lists and the quote backend's broader routing.
-- The company offers one-time projects and recurring maintenance. A quote depends on the property and requested work. The FAQ says quote requests are typically answered within one business day; do not guarantee a response time. Source: FAQ and Contact pages.
+- The company offers one-time projects and recurring maintenance. A quote depends on the property and requested work. The team reviews submitted property details and follows up with custom pricing; do not guarantee a response time. Source: FAQ and Contact pages.
+- Snow removal timing depends on when snowfall begins and ends, total accumulation, storm duration, road conditions, and the scheduled route. Specific arrival times cannot be guaranteed. The snowfall trigger, walkways, deicing, and any follow-up passes depend on the property agreement. During a prolonged or heavy storm an initial pass may be followed by final clearing. Source: HomeWorks Snow Removal Contract reviewed September 21, 2026.
 - Contact: (440) 886-7318 and hello@pappaslandscaping.com. Mailing address: PO Box 770057, Lakewood, OH 44107. Source: Contact page.
 - For account-specific schedules, invoices, payments, and existing quotes, direct visitors to the secure customer portal. Do not disclose customer information in public chat.
 Use these website and operational facts alongside the HomeWorks service descriptions. Do not claim a city is served unless it is confirmed above. Do not make up biographies, service boundaries, prices, or scheduling commitments.
@@ -64,7 +65,7 @@ export function websiteAnswer(question) {
     return 'We offer both one-time projects and recurring maintenance. You can request a spring or fall cleanup, weekly mowing, or another service through Get a quote, and the team will confirm the right scope for your property.';
   }
   if (/\b(how|when)\b/.test(q) && /\b(quote|estimate|response|respond)\b/.test(q)) {
-    return 'You can request a free property quote through Get a quote or call (440) 886-7318. The FAQ says we typically respond within one business day, though timing can vary.';
+    return 'You can request a free property quote through Get a quote or call (440) 886-7318. Our team will review your property details and follow up with custom pricing.';
   }
   if (/\b(phone|email|contact|call|text)\b/.test(q)) {
     return 'You can call or text Pappas & Co. Landscaping at (440) 886-7318, or email hello@pappaslandscaping.com.';
