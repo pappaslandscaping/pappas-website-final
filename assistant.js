@@ -34,7 +34,7 @@
     '  </div>',
     '  <div class="pa-lead-view" hidden>',
     '    <div class="pa-lead-heading"><button class="pa-back" type="button">← Chat</button><strong>Request a quote</strong></div>',
-    '    <p>Tell us about your property. Our team will review your request and follow up with a custom quote.</p>',
+    '    <p>Tell us about your property. We serve Lakewood, Brook Park, Bay Village, and the west side of Cleveland. Our team will review your request and follow up with a custom quote.</p>',
     '    <form class="pa-lead-form">',
     '      <div class="pa-name-row"><label>First name<input name="firstName" autocomplete="given-name" maxlength="80" required></label><label>Last name<input name="lastName" autocomplete="family-name" maxlength="80" required></label></div>',
     '      <label>Email<input name="email" type="email" autocomplete="email" maxlength="160" required></label>',
@@ -191,13 +191,19 @@
     submit.textContent = 'Sending…';
     try {
       var form = new FormData(leadForm);
+      var address = String(form.get('address') || '').trim();
+      var cityMatch = address.match(/,\s*([^,]+),\s*OH\b/i);
+      var city = cityMatch ? cityMatch[1].trim().toLowerCase() : '';
+      if (city && ['lakewood', 'brook park', 'bay village', 'cleveland'].indexOf(city) === -1) {
+        throw new Error('outside-area');
+      }
       var recaptchaToken = await getRecaptchaToken();
       var payload = {
         firstName: String(form.get('firstName') || '').trim(),
         lastName: String(form.get('lastName') || '').trim(),
         email: String(form.get('email') || '').trim(),
         phone: String(form.get('phone') || '').trim(),
-        address: String(form.get('address') || '').trim(),
+        address: address,
         services: [String(form.get('service') || '')],
         notes: String(form.get('notes') || '').trim(),
         source: 'website_ai_assistant',
@@ -217,7 +223,9 @@
       showChat();
       addMessage('bot', 'Thanks—your quote request was sent to our team. We’ll review your property details and follow up.');
     } catch (error) {
-      leadError.textContent = 'We couldn’t send your request. Please try the full quote form or call (440) 886-7318.';
+      leadError.textContent = error.message === 'outside-area'
+        ? 'We currently serve Lakewood, Brook Park, Bay Village, and west-side Cleveland only.'
+        : 'We couldn’t send your request. Please try the full quote form or call (440) 886-7318.';
       leadError.hidden = false;
     } finally {
       submit.disabled = false;
