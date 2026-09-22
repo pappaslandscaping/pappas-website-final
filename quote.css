@@ -936,7 +936,7 @@
 }
 
 /* ============================================
-   MOBILE BUTTON & CHAT WIDGET FIXES
+   MOBILE BUTTON & ASSISTANT SPACING
    ============================================ */
 
 /* Ensure Continue button is always tappable on mobile */
@@ -950,15 +950,9 @@
         touch-action: manipulation;
     }
 
-    /* Add bottom padding so content isn't hidden behind Tawk.to */
+    /* Leave space for the assistant launcher on small screens */
     .quote-form {
         padding-bottom: 80px;
     }
 
-    /* Move Tawk.to chat widget higher on quote page so it doesn't cover buttons */
-    iframe[title*="chat"],
-    #tawk-bubble-container,
-    .tawk-min-container {
-        bottom: 70px !important;
-    }
 }
