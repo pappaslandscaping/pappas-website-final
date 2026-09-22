@@ -167,6 +167,7 @@
                         <div class="form-group">
                             <label for="address">Service Address <span class="required">*</span></label>
                             <input type="text" id="address" name="address" autocomplete="off" autocapitalize="words" required placeholder="Enter your service address">
+                            <p class="helper-text">We serve Lakewood, Brook Park, Bay Village, and the west side of Cleveland only.</p>
                             <span class="error-message" id="addressError"></span>
                         </div>
 
@@ -884,9 +885,13 @@
 
         if (!source) { showError('source', 'Please tell us how you found us'); valid = false; }
         if (!address) { showError('address', 'Service address is required'); valid = false; }
-        else if (/[,\s]Westlake\s*,?\s*OH(?:\s+\d{5})?\s*$/i.test(address)) {
-            showError('address', 'We are not currently accepting new work in Westlake.');
-            valid = false;
+        else {
+            var cityMatch = address.match(/,\s*([^,]+),\s*OH\b/i);
+            var city = cityMatch ? cityMatch[1].trim().toLowerCase() : '';
+            if (city && ['lakewood', 'brook park', 'bay village', 'cleveland'].indexOf(city) === -1) {
+                showError('address', 'We currently serve Lakewood, Brook Park, Bay Village, and west-side Cleveland only.');
+                valid = false;
+            }
         }
 
         // Check that at least a package or service is selected
