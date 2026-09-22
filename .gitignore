@@ -1,2 +1,4 @@
 deploy-*.zip
 .DS_Store
+.env.local
+.netlify/
