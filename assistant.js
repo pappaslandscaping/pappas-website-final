@@ -55,13 +55,13 @@
     '      <label>Service address<input name="address" autocomplete="street-address" maxlength="220" required></label>',
     '      <label>Service<select name="service" required><option value="">Choose a service</option><option>Fall Cleanup</option><option>Lawn Maintenance</option><option>Spring Cleanup</option><option>Mulching</option><option>Aeration</option><option>Shrub &amp; Hedge Trimming</option><option>Fertilization</option><option>Weed Control</option><option>Snow Removal</option><option>Other</option></select></label>',
     '      <label>Anything else we should know? <span>(optional)</span><textarea name="notes" rows="3" maxlength="600"></textarea></label>',
-    '      <label class="pa-consent"><input name="consentTerms" type="checkbox" required><span>I agree to the <a href="/terms" target="_blank" rel="noopener">Terms</a> and <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>',
+    '      <label class="pa-consent"><input name="consentTerms" type="checkbox" required><span>I agree to the <a href="/terms.html" target="_blank" rel="noopener">Terms</a> and <a href="/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>',
     '      <p class="pa-lead-error" role="alert" hidden></p>',
     '      <button class="pa-submit-lead" type="submit">Send quote request</button>',
     '    </form>',
-    '    <p class="pa-lead-alternative">Prefer the full form? <a href="/quote">Open the quote page</a>.</p>',
+    '    <p class="pa-lead-alternative">Prefer the full form? <a href="/quote.html">Open the quote page</a>.</p>',
     '  </div>',
-    '  <footer class="pa-footer">Chats are saved for our team · No payment details · <a href="/privacy">Privacy</a> · <a href="tel:4408867318">Call us</a></footer>',
+    '  <footer class="pa-footer">Chats are saved for our team · No payment details · <a href="/privacy.html">Privacy</a> · <a href="tel:4408867318">Call us</a></footer>',
     '</section>'
   ].join('');
   document.body.appendChild(root);

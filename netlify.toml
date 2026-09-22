@@ -10,7 +10,7 @@
   minify = true
 
 [build.processing.html]
-  pretty_urls = true
+  pretty_urls = false
   # Disable email obfuscation
   email_obfuscation = false
 
