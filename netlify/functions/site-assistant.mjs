@@ -1,9 +1,12 @@
+import { WEBSITE_CONTEXT, websiteAnswer } from './site-knowledge.mjs';
+
 // HomeWorks item IDs: mowing 110482, spring cleanup 110522, fall cleanup
 // 110530, mulching 110492, aeration 110517, shrub trimming 110510,
 // snow removal 334202. Refresh this snapshot when catalog wording changes.
 const BUSINESS_CONTEXT = `
-Pappas & Co. Landscaping is a family-owned landscaping business serving Cleveland, Lakewood, Bay Village, Brook Park, Rocky River, North Olmsted, Fairview Park, and Parma, Ohio. For other locations, ask the visitor to contact the team to check availability.
+Pappas & Co. Landscaping is a family-owned landscaping business. The owner-confirmed service area is Lakewood, Brook Park, Bay Village, and the west side of Cleveland only. For Cleveland addresses, the team must confirm that the property is on the west side. Do not promise service in other cities.
 Contact: (440) 886-7318; hello@pappaslandscaping.com. Website quote form: /quote. Existing customer service request: /request-service. Secure customer portal: https://secure.copilotcrm.com/client/login/portal/5261.
+${WEBSITE_CONTEXT}
 
 Service descriptions reviewed against active HomeWorks catalog items on September 21, 2026. This is a reviewed snapshot, not a live HomeWorks connection:
 - Weekly mowing: lawn cut at an appropriate seasonal height, trimming around trees, beds, and pathways, and cleanup of clippings and hard surfaces. Concrete edging is an optional add-on.
@@ -107,7 +110,7 @@ export default async function siteAssistant(request) {
     return json({ error: "Invalid message" }, 400);
   }
 
-  const knownAnswer = catalogAnswer(messages.at(-1).content);
+  const knownAnswer = websiteAnswer(messages.at(-1).content) || catalogAnswer(messages.at(-1).content);
   if (knownAnswer) return json({ answer: knownAnswer });
 
   const apiKey = Netlify.env.get("OPENAI_API_KEY");
