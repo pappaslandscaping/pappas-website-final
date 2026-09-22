@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Your Free Lawn Care Quote Cleveland | Pappas & Co. Landscaping</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <meta name="description" content="Free lawn care quotes in Cleveland. Get custom pricing for mowing, cleanup, aeration, snow removal. Response in 1 business day. No obligation.">
+    <meta name="description" content="Request a free property quote for lawn care, seasonal cleanup, or snow removal in Lakewood, Brook Park, Bay Village, or the west side of Cleveland.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -72,7 +72,7 @@
         <div class="container">
             <div class="quote-header">
                 <h1>Get Your Free Quote</h1>
-                <p>Fill out the form below and we'll send you a customized quote within 24 hours</p>
+                <p>Tell us about your property and the work you need. Our team will review your request and follow up with custom pricing.</p>
             </div>
 
             <!-- Progress Indicator -->
@@ -167,6 +167,7 @@
                         <div class="form-group">
                             <label for="address">Service Address <span class="required">*</span></label>
                             <input type="text" id="address" name="address" autocomplete="off" autocapitalize="words" required placeholder="Enter your service address">
+                            <p class="helper-text">We serve Lakewood, Brook Park, Bay Village, and the west side of Cleveland only.</p>
                             <span class="error-message" id="addressError"></span>
                         </div>
 
@@ -884,9 +885,13 @@
 
         if (!source) { showError('source', 'Please tell us how you found us'); valid = false; }
         if (!address) { showError('address', 'Service address is required'); valid = false; }
-        else if (/[,\s]Westlake\s*,?\s*OH(?:\s+\d{5})?\s*$/i.test(address)) {
-            showError('address', 'We are not currently accepting new work in Westlake.');
-            valid = false;
+        else {
+            var cityMatch = address.match(/,\s*([^,]+),\s*OH\b/i);
+            var city = cityMatch ? cityMatch[1].trim().toLowerCase() : '';
+            if (city && ['lakewood', 'brook park', 'bay village', 'cleveland'].indexOf(city) === -1) {
+                showError('address', 'We currently serve Lakewood, Brook Park, Bay Village, and west-side Cleveland only.');
+                valid = false;
+            }
         }
 
         // Check that at least a package or service is selected
@@ -1283,5 +1288,6 @@
         });
     });
     </script>
+    <script src="assistant.js" defer></script>
 </body>
 </html>

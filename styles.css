@@ -282,7 +282,7 @@ nav.scrolled .logo-img {
     text-align: center;
     padding: 10rem 0 8rem;
     overflow: hidden;
-    background-image: url('https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1600&q=80');
+    background-image: url('fall-leaves-hero.webp');
     background-size: cover;
     background-position: center;
 }
@@ -336,6 +336,19 @@ nav.scrolled .logo-img {
     padding: 0 2rem;
     position: relative;
     z-index: 3;
+}
+
+.hero-seasonal-note {
+    display: inline-block;
+    margin: 0 0 1.25rem;
+    padding: 0.55rem 1rem;
+    border: 1px solid rgba(201, 221, 128, 0.7);
+    border-radius: 999px;
+    background: rgba(46, 64, 61, 0.8);
+    color: var(--yellow);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
 }
 
 .hero-title {
