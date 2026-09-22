@@ -113,7 +113,7 @@ export default async function siteAssistant(request) {
   const knownAnswer = websiteAnswer(messages.at(-1).content) || catalogAnswer(messages.at(-1).content);
   if (knownAnswer) return json({ answer: knownAnswer });
 
-  const apiKey = Netlify.env.get("OPENAI_API_KEY");
+  const apiKey = Netlify.env.get("OPENAI_API_KEY")?.trim();
   if (!apiKey) return json({ error: "Assistant is temporarily unavailable" }, 503);
 
   try {
