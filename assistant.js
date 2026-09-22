@@ -40,6 +40,7 @@
     '      <label>Your name<input name="name" autocomplete="name" maxlength="80" required></label>',
     '      <label>Phone or email<input name="contact" maxlength="160" required></label>',
     '      <label>How can we help?<textarea name="message" rows="3" maxlength="1200" required></textarea></label>',
+    '      <label class="pa-honeypot" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>',
     '      <p class="pa-human-error" role="alert" hidden></p>',
     '      <button class="pa-submit-lead" type="submit">Send to our team</button>',
     '    </form>',
@@ -268,10 +269,10 @@
     submit.disabled = true;
     try {
       var form = new FormData(humanForm);
-      var recaptchaToken = await getRecaptchaToken('site_chat');
+      var recaptchaToken = await getRecaptchaToken('site_chat').catch(function () { return null; });
       var response = await fetch(chatApi, {
         method: 'POST', headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ name: String(form.get('name') || '').trim(), contact: String(form.get('contact') || '').trim(), message: String(form.get('message') || '').trim(), recaptchaToken: recaptchaToken })
+        body: JSON.stringify({ name: String(form.get('name') || '').trim(), contact: String(form.get('contact') || '').trim(), message: String(form.get('message') || '').trim(), website: String(form.get('website') || ''), recaptchaToken: recaptchaToken })
       });
       var data = await response.json().catch(function () { return {}; });
       if (!response.ok || !data.success) throw new Error(data.error || 'We couldn’t send your message. Please call us instead.');

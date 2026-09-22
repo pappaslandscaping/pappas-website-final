@@ -92,6 +92,7 @@
 .pa-human-form label { display: block; font-size: 12px; font-weight: 700; }
 .pa-human-form input, .pa-human-form textarea { display: block; width: 100%; margin-top: 5px; border: 1px solid #bdcbb8; border-radius: 8px; padding: 9px 10px; background: #fff; color: var(--pa-dark); font-size: 14px; }
 .pa-human-error { color: #9c2626; line-height: 1.4; }
+.pa-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .pa-lead-form label { display: block; font-size: 12px; font-weight: 700; }
 .pa-lead-form label span { font-weight: 400; }
 .pa-lead-form input:not([type=checkbox]), .pa-lead-form select, .pa-lead-form textarea { display: block; width: 100%; margin-top: 5px; border: 1px solid #bdcbb8; border-radius: 8px; padding: 9px 10px; background: #fff; color: var(--pa-dark); font-size: 14px; }
