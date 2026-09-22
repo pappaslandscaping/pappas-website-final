@@ -22,7 +22,7 @@
     '    <div class="pa-messages" role="log" aria-live="polite" aria-relevant="additions text"></div>',
     '    <div class="pa-actions" aria-label="Quick questions">',
     '      <button type="button" data-action="services">Our services</button>',
-    '      <button type="button" data-action="fall">Fall cleanups</button>',
+    '      <button type="button" data-action="area">Service area</button>',
     '      <button type="button" data-action="quote">Get a quote</button>',
     '      <button type="button" data-action="account">My account</button>',
     '    </div>',
@@ -177,7 +177,7 @@
   root.querySelectorAll('.pa-actions button').forEach(function (button) {
     button.addEventListener('click', function () {
       if (button.dataset.action === 'services') ask('What services do you offer?');
-      if (button.dataset.action === 'fall') ask('What does your fall cleanup include?');
+      if (button.dataset.action === 'area') ask('What areas do you serve?');
       if (button.dataset.action === 'quote') showLead('');
       if (button.dataset.action === 'account') addAccountHelp();
     });
