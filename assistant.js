@@ -345,7 +345,10 @@
       else payload.recaptchaToken = await getRecaptchaToken('site_chat').catch(function () { return null; });
       var response = await fetch(url, { method: 'POST', headers: headers, body: JSON.stringify(payload) });
       var data = await response.json().catch(function () { return {}; });
-      if (!response.ok || !data.success) throw new Error(data.error || 'We couldn’t send your message. Please call us instead.');
+      if (!response.ok || !data.success) {
+        if (response.status === 400 || response.status === 403) throw new Error(data.error || 'Please check your information and try again.');
+        throw new Error('chat-unavailable');
+      }
       if (handoff) liveChat.mode = 'human';
       else liveChat = { id: data.id, token: data.token, mode: 'human' };
       saveChat();
@@ -359,7 +362,9 @@
           : 'Thanks. Your message is in our team inbox. You can keep this chat open for a reply or call (440) 886-7318.');
       await pollLiveChat();
     } catch (error) {
-      humanError.textContent = error.message;
+      humanError.textContent = error.message === 'chat-unavailable' || error instanceof TypeError
+        ? 'We couldn’t connect to our team inbox, so your message was not sent. Please call (440) 886-7318 or try again later.'
+        : error.message;
       humanError.hidden = false;
     } finally { submit.disabled = false; }
   });
