@@ -10,12 +10,12 @@
   var root = document.createElement('div');
   root.className = 'pappas-assistant';
   root.innerHTML = [
-    '<button class="pa-launcher" type="button" aria-label="Open Pappas assistant" aria-expanded="false">',
-    '  <span class="pa-launcher-icon" aria-hidden="true">✦</span><span>Ask Pappas</span>',
+    '<button class="pa-launcher" type="button" aria-label="Chat with Pappas" aria-expanded="false">',
+    '  <span class="pa-launcher-icon" aria-hidden="true">✦</span><span>Chat with Pappas</span>',
     '</button>',
     '<section class="pa-panel" role="dialog" aria-label="Pappas website assistant" hidden>',
     '  <header class="pa-header">',
-    '    <div><strong class="pa-title">Pappas Assistant</strong><span class="pa-subtitle">Service questions and quote help</span></div>',
+    '    <div><strong class="pa-title">Pappas Assistant</strong><span class="pa-subtitle">Quick answers and help from our team</span></div>',
     '    <button class="pa-close" type="button" aria-label="Close assistant">×</button>',
     '  </header>',
     '  <div class="pa-chat-view">',
