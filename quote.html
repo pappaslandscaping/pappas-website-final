@@ -38,7 +38,7 @@
             </div>
             <div class="top-bar-right">
                 <span class="top-bar-cta">Ready for a better lawn? Let&#x27;s chat</span>
-                <a href="/cdn-cgi/l/email-protection#29414c4545460f0a1f1d1259485959485a4548474d5a4a485940474e0f0a1d1f124a4644" class="top-bar-link">hello&#64;pappaslandscaping&#46;com</a>
+                <a href="mailto:hello@pappaslandscaping.com" class="top-bar-link">hello@pappaslandscaping.com</a>
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <a class='logo' href='/'>
+            <a class="logo" href="index.html">
                 <img src="logo-horizontal.svg" alt="Pappas & Co. Landscaping" class="logo-img">
             </a>
             
@@ -57,14 +57,14 @@
             </button>
 
             <ul class="nav-links" id="navLinks">
-                <li><a href='/'>Home</a></li>
-                <li><a href='/about.html'>About Us</a></li>
-                <li><a href='/services.html'>Services</a></li>
-                <li><a href='/reviews.html'>Reviews</a></li>
-                <li><a href='/blog.html'>Blog</a></li>
-                <li><a href='/faq.html'>FAQ</a></li>
-                <li><a href='/contact.html'>Contact</a></li>
-                <li><a class='cta-nav' href='/quote.html'>Get a Quote</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="https://secure.copilotcrm.com/client/login/portal/5261" target="_blank" rel="noopener noreferrer">Client Portal</a></li>
+                <li><a href="quote.html" class="cta-nav active">Get a Quote</a></li>
             </ul>
         </div>
     </nav>
@@ -75,6 +75,7 @@
             <div class="quote-header">
                 <h1>Get Your Free Quote</h1>
                 <p>Tell us about your property and the work you need. Our team will review your request and follow up with custom pricing.</p>
+                <p id="quoteSeasonalContext" class="quote-seasonal-context" hidden>Fall Cleanup is selected below. Tell us about your property and we’ll prepare a custom quote.</p>
             </div>
 
             <!-- Progress Indicator -->
@@ -695,6 +696,12 @@
             document.querySelectorAll('input[name="service"]').forEach(function(input) {
                 if (input.value.toLowerCase() === requestedService.toLowerCase()) input.checked = true;
             });
+            var seasonalContext = document.getElementById('quoteSeasonalContext');
+            if (requestedService.toLowerCase() === 'fall cleanup') seasonalContext.hidden = false;
+            if (requestedService.toLowerCase() === 'snow removal') {
+                seasonalContext.textContent = 'Snow Removal is selected below. Tell us about your driveway and any walkways or deicing you want quoted.';
+                seasonalContext.hidden = false;
+            }
         }
         var requestedPackage = pageParams.get('package');
         if (requestedPackage) {

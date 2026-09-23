@@ -7,7 +7,7 @@ Website and company information:
 - Pappas & Co. Landscaping is a family-owned Cleveland-area landscaping company. Tim Pappas is the owner and founder. He began working in lawn care in 2004 and has more than 20 years of experience. Theresa Pappas is the office manager and handles scheduling and customer care. Chris is a crew leader, and Aidan helps when home from college. Source: About page.
 - Current service area, confirmed directly by the owner: Lakewood, Brook Park, Bay Village, and the west side of Cleveland only. A Cleveland city name alone is not enough to confirm coverage; ask for the property address so the team can check which side of Cleveland it is. Other cities, including Westlake, Rocky River, North Olmsted, Fairview Park, and Parma, are outside the current service area. This owner policy supersedes older website lists and the quote backend's broader routing.
 - The company offers one-time projects and recurring maintenance. A quote depends on the property and requested work. The team reviews submitted property details and follows up with custom pricing; do not guarantee a response time. Source: FAQ and Contact pages.
-- Snow removal timing depends on when snowfall begins and ends, total accumulation, storm duration, road conditions, and the scheduled route. Specific arrival times cannot be guaranteed. The snowfall trigger, walkways, deicing, and any follow-up passes depend on the property agreement. During a prolonged or heavy storm an initial pass may be followed by final clearing. Source: HomeWorks Snow Removal Contract reviewed September 21, 2026.
+- Snow removal is offered through seasonal contracts, not per-push or per-visit plowing. The owner confirmed a trigger of 2 inches or more of new snowfall and limited winter route openings on September 23, 2026. Timing depends on when snowfall begins and ends, total accumulation, storm duration, road conditions, and the scheduled route. Specific arrival times cannot be guaranteed. Walkways, deicing, and any follow-up passes depend on the property agreement. During a prolonged or heavy storm an initial pass may be followed by final clearing. Sources: owner confirmation and HomeWorks Snow Removal Contract.
 - Contact: (440) 886-7318 and hello@pappaslandscaping.com. Mailing address: PO Box 770057, Lakewood, OH 44107. Source: Contact page.
 - For account-specific schedules, invoices, payments, and existing quotes, direct visitors to the secure customer portal. Do not disclose customer information in public chat.
 Use these website and operational facts alongside the HomeWorks service descriptions. Do not claim a city is served unless it is confirmed above. Do not make up biographies, service boundaries, prices, or scheduling commitments.
@@ -22,6 +22,9 @@ function cityLabel(city) {
 
 export function websiteAnswer(question) {
   const q = question.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+  if (/\b(snow|plow|plowing)\b/.test(q) && /\b(per push|per visit|one time|one off|single visit)\b/.test(q)) {
+    return 'We offer snow removal through seasonal contracts, not per-push visits. Driveway service is scheduled after 2 inches or more of new snowfall, with timing based on the storm and route. Winter route openings are limited, so please request a quote to confirm availability.';
+  }
   if (/\b(invoice|bill|payment|balance|account|next visit|scheduled visit)\b/.test(q) || /\bmy schedule\b/.test(q)) {
     return "For your schedule, invoices, payments, and account details, use the My account button below to open the secure customer portal, or call us at (440) 886-7318. Please don't share passwords or payment details in chat.";
   }
