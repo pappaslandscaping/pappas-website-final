@@ -443,9 +443,18 @@ nav.scrolled .logo-img {
 
 .snow-preview-inner {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: 230px minmax(0, 1fr) auto;
     align-items: center;
     gap: 2.5rem;
+}
+
+.snow-preview-photo {
+    display: block;
+    width: 230px;
+    height: 240px;
+    object-fit: cover;
+    border: 5px solid white;
+    border-radius: 14px;
 }
 
 .snow-preview-eyebrow {
@@ -1405,6 +1414,12 @@ nav.scrolled .logo-img {
         grid-template-columns: 1fr;
         gap: 1.25rem;
         text-align: center;
+    }
+
+    .snow-preview-photo {
+        width: 210px;
+        height: 219px;
+        justify-self: center;
     }
 
     .snow-preview {
