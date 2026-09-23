@@ -387,7 +387,8 @@
       if (city && ['lakewood', 'brook park', 'bay village', 'cleveland'].indexOf(city) === -1) {
         throw new Error('outside-area');
       }
-      var recaptchaToken = await getRecaptchaToken();
+      // Match the full quote form: a blocked verification script must not prevent a request.
+      var recaptchaToken = await getRecaptchaToken().catch(function () { return null; });
       var payload = {
         firstName: String(form.get('firstName') || '').trim(),
         lastName: String(form.get('lastName') || '').trim(),
