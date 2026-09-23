@@ -73,11 +73,14 @@
     <section class="quote-section">
         <div class="container">
             <div class="quote-header">
-                <h1>Get Your Free Quote</h1>
-                <p>Tell us about your property and the work you need. Our team will review your request and follow up with custom pricing.</p>
+                <p class="quote-eyebrow">Free property quote</p>
+                <h1>Tell us what your property needs.</h1>
+                <p>Share a few details and our team will review your request before confirming the scope and price.</p>
                 <p id="quoteSeasonalContext" class="quote-seasonal-context" hidden>Fall Cleanup is selected below. Tell us about your property and we’ll prepare a custom quote.</p>
             </div>
 
+            <div class="quote-layout">
+                <div class="quote-main">
             <!-- Progress Indicator -->
             <div class="progress-bar">
                 <div class="progress-step active" data-step="1">
@@ -87,12 +90,12 @@
                 <div class="progress-line"></div>
                 <div class="progress-step" data-step="2">
                     <div class="step-number">2</div>
-                    <div class="step-label">Confirm</div>
+                    <div class="step-label">Property</div>
                 </div>
                 <div class="progress-line"></div>
                 <div class="progress-step" data-step="3">
                     <div class="step-number">3</div>
-                    <div class="step-label">Submit</div>
+                    <div class="step-label">Finish</div>
                 </div>
             </div>
 
@@ -111,18 +114,11 @@
                     <label>Don't fill this out: <input name="bot-field"></label>
                 </p>
                 <div id="draftRestoreNotice" style="display:none;background:#eef6e9;border:1px solid #c9dd80;color:#2e403d;padding:12px 16px;border-radius:8px;margin-bottom:16px;">We restored your unfinished quote request from this device.</div>
-                <div class="customer-shortcut">
-                    <div class="customer-shortcut__copy">
-                        <h2>Already a customer?</h2>
-                        <p>Send us a service request and we’ll match it to your HomeWorks account.</p>
-                    </div>
-                    <a href="/request-service.html" class="btn btn-primary customer-shortcut__button">Request Service</a>
-                </div>
                 <!-- Step 1: Contact Info & Services -->
                 <div class="form-step active" data-step="1">
                     <div class="form-section">
                         <h2>Contact Information</h2>
-                        <p class="section-subtitle">We'll send your quote to this email</p>
+                        <p class="section-subtitle">We’ll use your phone and email to follow up about the property.</p>
 
                         <div class="form-row">
                             <div class="form-group">
@@ -199,7 +195,7 @@
 
                     <div class="form-section">
                         <h2>Select Your Services</h2>
-                        <p class="section-subtitle">Choose a package or pick individual services</p>
+                        <p class="section-subtitle">Choose a package or only the individual services you want quoted.</p>
 
                         <!-- Package Options -->
                         <div class="packages-grid">
@@ -214,15 +210,6 @@
                                     <li>Aeration (2x per year)</li>
                                     <li>Fertilization Program</li>
                                 </ul>
-                                <div class="package-included">
-                                    <strong>INCLUDED</strong>
-                                    <ul>
-                                        <li>Reliable scheduling</li>
-                                        <li>Professional equipment</li>
-                                        <li>Debris removal</li>
-                                        <li>Customer portal access</li>
-                                    </ul>
-                                </div>
                             </div>
 
                             <div class="package-card featured" data-package="complete">
@@ -238,15 +225,6 @@
                                     <li>Mulching</li>
                                     <li>Aeration & Fertilization</li>
                                 </ul>
-                                <div class="package-included">
-                                    <strong>INCLUDED</strong>
-                                    <ul>
-                                        <li>Everything in Essential Care</li>
-                                        <li>Regular maintenance visits</li>
-                                        <li>Property care updates</li>
-                                        <li>Customer portal access</li>
-                                    </ul>
-                                </div>
                             </div>
 
                             <div class="package-card" data-package="premium">
@@ -257,15 +235,9 @@
                                 <ul class="package-features">
                                     <li>Everything in Complete Care</li>
                                     <li>Snow Removal (Winter)</li>
+                                    <li>Storm-Based Snow Routes</li>
+                                    <li>Year-Round Service</li>
                                 </ul>
-                                <div class="package-included">
-                                    <strong>INCLUDED</strong>
-                                    <ul>
-                                        <li>Year-round service</li>
-                                        <li>Winter weather response</li>
-                                        <li>Customer portal access</li>
-                                    </ul>
-                                </div>
                             </div>
                         </div>
 
@@ -349,7 +321,7 @@
                     </div>
 
                     <div class="form-actions">
-                        <button type="button" class="btn btn-primary btn-next" id="step1Next">Continue →</button>
+                        <button type="button" class="btn btn-primary btn-next" id="step1Next">Continue to Property →</button>
                     </div>
                 </div>
 
@@ -372,7 +344,7 @@
 
                     <div class="form-actions">
                         <button type="button" class="btn btn-secondary btn-prev" id="step2Prev">← Back</button>
-                        <button type="button" class="btn btn-primary btn-next" id="step2Next">Looks Good, Continue →</button>
+                        <button type="button" class="btn btn-primary btn-next" id="step2Next">Confirm Property →</button>
                     </div>
                 </div>
 
@@ -506,12 +478,43 @@
                 <div class="form-step success-step" data-step="4">
                     <div class="success-message">
                         <div class="success-icon">✓</div>
-                        <h2>Quote Request Submitted!</h2>
-                        <p>We'll text or email your quote soon.</p>
+                        <h2>We received your request.</h2>
+                        <p>Our team will review the property details and contact you using your preferred method.</p>
                         <button type="button" class="btn btn-primary" onclick="window.location.reload()">Submit Another Request</button>
                     </div>
                 </div>
             </form>
+                </div>
+
+                <aside class="quote-guide" aria-label="What to expect from your quote request">
+                    <p class="quote-guide__eyebrow">What to expect</p>
+                    <h2>A quote built around your property.</h2>
+                    <ul class="quote-guide__list">
+                        <li>
+                            <strong>Choose the work</strong>
+                            <span>Select a care package or only the services you need.</span>
+                        </li>
+                        <li>
+                            <strong>Confirm the property</strong>
+                            <span>We use the service address and details you provide to prepare accurate pricing.</span>
+                        </li>
+                        <li>
+                            <strong>Hear from our team</strong>
+                            <span>We’ll review the request and follow up before scheduling any work.</span>
+                        </li>
+                    </ul>
+                    <div class="quote-guide__area">
+                        <strong>Current service area</strong>
+                        <span>Lakewood, Brook Park, Bay Village, and Cleveland’s west side.</span>
+                    </div>
+                    <div class="quote-guide__customer">
+                        <strong>Already a customer?</strong>
+                        <span>Use the service request form so we can match the request to your account.</span>
+                        <a href="/request-service.html">Request service →</a>
+                    </div>
+                    <p class="quote-guide__contact">Prefer to talk? <a href="tel:4408867318">Call or text (440) 886-7318</a>.</p>
+                </aside>
+            </div>
         </div>
     </section>
 
@@ -737,6 +740,7 @@
                     selectedPackage = savedDraft.package;
                     var savedCard = document.querySelector('.package-card[data-package="' + selectedPackage + '"]');
                     if (savedCard) savedCard.classList.add('selected');
+                    document.getElementById('selectedPackageValue').value = selectedPackage;
                 }
                 document.getElementById('draftRestoreNotice').style.display = 'block';
             }
@@ -1239,6 +1243,8 @@
                     this.classList.add('selected');
                     selectedPackage = pkg;
                 }
+
+                document.getElementById('selectedPackageValue').value = selectedPackage || 'None';
             });
         });
 
