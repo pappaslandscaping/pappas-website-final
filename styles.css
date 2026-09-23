@@ -433,61 +433,15 @@ nav.scrolled .logo-img {
     margin-bottom: 1.7rem !important;
 }
 
-.snow-preview {
-    background: var(--green-dark);
-    color: white;
-    margin-top: 3rem;
-    padding: 2.25rem 2.5rem;
-    border-radius: 18px;
+.snow-feature-grid {
+    margin-top: 4.5rem;
+    padding-top: 4.5rem;
+    border-top: 1px solid #e2e0d8;
 }
 
-.snow-preview-inner {
-    display: grid;
-    grid-template-columns: 230px minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 2.5rem;
-}
-
-.snow-preview-photo {
-    display: block;
-    width: 230px;
-    height: 240px;
+.snow-feature-photo img {
+    aspect-ratio: 275 / 287;
     object-fit: cover;
-    border: 5px solid white;
-    border-radius: 14px;
-}
-
-.snow-preview-eyebrow {
-    color: #d7e7a3;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 0.65rem;
-}
-
-.snow-preview h2 {
-    color: white;
-    font-size: clamp(1.65rem, 2.7vw, 2.3rem);
-    margin-bottom: 0.7rem;
-}
-
-.snow-preview-inner > div > p:last-child {
-    max-width: 680px;
-    line-height: 1.65;
-    color: #edf3e6;
-}
-
-.snow-preview-button {
-    background: white;
-    color: var(--green-dark);
-    white-space: nowrap;
-    text-align: center;
-}
-
-.snow-preview-button:hover {
-    background: #f1f6e8;
-    transform: translateY(-2px);
 }
 
 /* Buttons */
@@ -1410,26 +1364,9 @@ nav.scrolled .logo-img {
         font-size: 1rem;
     }
 
-    .snow-preview-inner {
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
-        text-align: center;
-    }
-
-    .snow-preview-photo {
-        width: 210px;
-        height: 219px;
-        justify-self: center;
-    }
-
-    .snow-preview {
-        padding: 1.8rem 1.25rem;
-        margin-top: 2.5rem;
-    }
-
-    .snow-preview-button {
-        white-space: normal;
-        justify-self: center;
+    .snow-feature-grid {
+        margin-top: 3rem;
+        padding-top: 3rem;
     }
 
     .btn {
