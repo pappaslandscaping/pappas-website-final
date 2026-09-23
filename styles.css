@@ -436,7 +436,9 @@ nav.scrolled .logo-img {
 .snow-preview {
     background: var(--green-dark);
     color: white;
-    padding: 2.75rem 0;
+    margin-top: 3rem;
+    padding: 2.25rem 2.5rem;
+    border-radius: 18px;
 }
 
 .snow-preview-inner {
@@ -1401,8 +1403,13 @@ nav.scrolled .logo-img {
 
     .snow-preview-inner {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 1.25rem;
         text-align: center;
+    }
+
+    .snow-preview {
+        padding: 1.8rem 1.25rem;
+        margin-top: 2.5rem;
     }
 
     .snow-preview-button {
