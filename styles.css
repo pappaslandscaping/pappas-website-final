@@ -666,6 +666,174 @@ nav.scrolled .logo-img {
     transform: translateX(5px);
 }
 
+/* Services page */
+.services-seasonal,
+.individual-services-section {
+    padding: 6rem 0;
+    background: var(--cream);
+}
+
+.services-section-eyebrow {
+    text-align: center;
+}
+
+.services-seasonal .section-subtitle,
+.services-packages .section-subtitle,
+.individual-services-section .section-subtitle {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.seasonal-service-row {
+    display: grid;
+    grid-template-columns: minmax(245px, 320px) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(2.5rem, 6vw, 6rem);
+    padding: 3.5rem 0;
+    border-top: 1px solid #e2e0d8;
+}
+
+.seasonal-service-row:first-of-type {
+    border-top: 0;
+    padding-top: 0;
+}
+
+.seasonal-service-row:last-child {
+    padding-bottom: 0;
+}
+
+.seasonal-service-photo {
+    width: min(100%, 320px);
+    padding: 18px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 16px 40px rgba(31, 44, 42, 0.1);
+    justify-self: center;
+}
+
+.seasonal-service-photo img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 275 / 287;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.seasonal-service-copy h3 {
+    color: var(--green-dark);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+}
+
+.seasonal-service-copy > p:not(.section-eyebrow) {
+    max-width: 650px;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.seasonal-service-copy .service-detail {
+    color: #50635c;
+    font-size: 0.98rem !important;
+    margin-bottom: 1.7rem !important;
+}
+
+.services-packages {
+    padding: 6rem 0;
+    background: white;
+}
+
+.services-packages .services-grid {
+    margin-bottom: 0;
+}
+
+.individual-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.individual-service-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 270px;
+    padding: 2rem;
+    background: white;
+    border: 1px solid #e4e7e2;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(31, 44, 42, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.individual-service-card:hover {
+    transform: translateY(-4px);
+    border-color: #c9d5bd;
+    box-shadow: 0 14px 30px rgba(31, 44, 42, 0.1);
+}
+
+.individual-service-number,
+.services-benefit-number {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1.25rem;
+    border: 1px solid #d6e2c1;
+    border-radius: 50%;
+    background: #f3f7e9;
+    color: var(--green-primary);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.individual-service-card h3,
+.services-benefit-card h3 {
+    color: var(--green-dark);
+    font-size: 1.4rem;
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+}
+
+.individual-service-card p,
+.services-benefit-card p {
+    color: #4f5d59;
+    line-height: 1.65;
+}
+
+.individual-service-card .service-cta {
+    margin-top: auto;
+    padding-top: 1.25rem;
+}
+
+.services-benefits {
+    padding: 6rem 0;
+    background: var(--gray-light);
+}
+
+.services-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.services-benefit-card {
+    display: flex;
+    gap: 1.25rem;
+    padding: 2rem;
+    background: white;
+    border: 1px solid #e5e7e5;
+    border-radius: 16px;
+}
+
+.services-benefit-number {
+    flex: 0 0 48px;
+    margin-bottom: 0;
+}
+
 /* Individual Services */
 .individual-services {
     text-align: center;
@@ -1486,6 +1654,49 @@ nav.scrolled .logo-img {
 
     .service-tags {
         gap: 0.5rem;
+    }
+
+    .services-seasonal,
+    .services-packages,
+    .individual-services-section,
+    .services-benefits {
+        padding: 3.5rem 0;
+    }
+
+    .seasonal-service-row {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 3rem 0;
+    }
+
+    .seasonal-service-photo {
+        width: min(100%, 260px);
+        padding: 12px;
+    }
+
+    .seasonal-service-copy {
+        text-align: center;
+    }
+
+    .seasonal-service-copy h3 {
+        font-size: 2rem;
+    }
+
+    .seasonal-service-copy > p:not(.section-eyebrow) {
+        font-size: 1rem;
+    }
+
+    .individual-services-grid,
+    .services-benefits-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .individual-service-card {
+        min-height: 0;
+    }
+
+    .services-benefit-card {
+        padding: 1.5rem;
     }
 
     .tag {

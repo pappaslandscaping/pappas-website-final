@@ -68,23 +68,59 @@
         <div class="page-hero-overlay"></div>
         <img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1600&q=80" alt="Professional lawn care services" class="page-hero-img">
         <div class="page-hero-content">
-            <h1>Everything Your Lawn Needs to Look Amazing</h1>
-            <p>From weekly mowing to winter snow removal, we've got you covered</p>
+            <h1>Reliable Care for Every Season</h1>
+            <p>Lawn care, cleanups, and seasonal snow service for Cleveland's west side</p>
+        </div>
+    </section>
+
+    <!-- Seasonal Services -->
+    <section class="services-seasonal" aria-labelledby="seasonal-services-title">
+        <div class="container">
+            <p class="section-eyebrow services-section-eyebrow">Seasonal services</p>
+            <h2 class="section-title" id="seasonal-services-title">Plan ahead for fall and winter.</h2>
+            <p class="section-subtitle">Limited scheduling is available in Lakewood, Brook Park, Bay Village, and Cleveland's west side.</p>
+
+            <article class="seasonal-service-row">
+                <div class="seasonal-service-photo">
+                    <img src="fall-leaf-blower.jpeg" alt="Leaves being cleared from a lawn with a leaf blower" width="275" height="287" loading="lazy" decoding="async">
+                </div>
+                <div class="seasonal-service-copy">
+                    <p class="section-eyebrow">Fall cleanup</p>
+                    <h3>Clear the leaves without losing your weekend.</h3>
+                    <p>We remove fallen leaves, branches, and seasonal debris from lawns and landscape areas, then haul it away.</p>
+                    <p class="service-detail">Fall cleanups typically run from late October through November or early December, depending on the weather.</p>
+                    <a href="quote.html?service=Fall%20Cleanup" class="btn btn-primary">Request a Fall Cleanup Quote</a>
+                </div>
+            </article>
+
+            <article class="seasonal-service-row">
+                <div class="seasonal-service-photo snow-service-photo">
+                    <img src="snow-plowed-driveway.jpg" alt="Cleared residential driveway bordered by snow" width="720" height="720" loading="lazy" decoding="async">
+                </div>
+                <div class="seasonal-service-copy">
+                    <p class="section-eyebrow">Limited winter route openings</p>
+                    <h3>Seasonal snow service with a 2-inch trigger.</h3>
+                    <p>Driveway plowing is scheduled after 2 inches or more of new snowfall. Timing depends on the storm, road conditions, and the route.</p>
+                    <p class="service-detail">Ask whether walkways or deicing should be included in your property quote.</p>
+                    <a href="quote.html?service=Snow%20Removal" class="btn btn-primary">Request a Snow Quote</a>
+                </div>
+            </article>
         </div>
     </section>
 
     <!-- Service Packages Section -->
     <section class="services-packages">
         <div class="container">
-            <h2 class="section-title">Choose Your Package</h2>
-            <p class="section-subtitle">Or mix and match individual services below</p>
+            <p class="section-eyebrow services-section-eyebrow">Ongoing care</p>
+            <h2 class="section-title">Choose the level of help you need.</h2>
+            <p class="section-subtitle">Start with a package or choose individual services below.</p>
 
             <div class="services-grid">
                 <!-- Essential Care -->
                 <div class="service-card">
                     <div class="service-icon" aria-hidden="true">01</div>
                     <h3>Essential Care</h3>
-                    <p class="service-tagline">Perfect for DIY-ers who want the seasonal heavy lifting done</p>
+                    <p class="service-tagline">Seasonal help for the biggest lawn-care jobs.</p>
                     <ul class="service-includes">
                         <li>Spring Cleanup</li>
                         <li>Fall Cleanup</li>
@@ -99,7 +135,7 @@
                     <div class="popular-badge">Most Popular</div>
                     <div class="service-icon" aria-hidden="true">02</div>
                     <h3>Complete Care</h3>
-                    <p class="service-tagline">The "never think about my lawn again" package</p>
+                    <p class="service-tagline">Weekly maintenance plus seasonal care.</p>
                     <ul class="service-includes">
                         <li>Weekly Lawn Maintenance</li>
                         <li>Spring & Fall Cleanups</li>
@@ -114,7 +150,7 @@
                 <div class="service-card">
                     <div class="service-icon" aria-hidden="true">03</div>
                     <h3>Premium Care</h3>
-                    <p class="service-tagline">365 days of not worrying about your property</p>
+                    <p class="service-tagline">Year-round lawn and winter support.</p>
                     <ul class="service-includes">
                         <li>Everything in Complete Care</li>
                         <li>Snow Removal (Winter)</li>
@@ -128,124 +164,128 @@
     </section>
 
     <!-- Individual Services -->
-    <section class="individual-services-section" style="padding: 6rem 0; background: white;">
+    <section class="individual-services-section">
         <div class="container">
-            <h2 class="section-title">À La Carte Services</h2>
-            <p class="section-subtitle">Pick and choose exactly what you need</p>
+            <p class="section-eyebrow services-section-eyebrow">Individual services</p>
+            <h2 class="section-title">Choose only what your property needs.</h2>
+            <p class="section-subtitle">Request one service or combine several in a custom quote.</p>
 
             <!-- Service Grid -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; margin-top: 3rem;">
+            <div class="individual-services-grid">
                 
                 <!-- Lawn Maintenance -->
-                <div style="background: var(--gray-light); padding: 2.5rem; border-radius: 12px;">
-                    <h3 style="font-size: 1.5rem; color: var(--green-dark); margin-bottom: 1rem;">Lawn Maintenance</h3>
-                    <p style="color: var(--charcoal); line-height: 1.7;">Weekly mowing, edging, and trimming to keep your lawn looking sharp. We're talking crisp lines, perfectly striped grass, and that "just mowed" smell every week.</p>
-                </div>
+                <article class="individual-service-card">
+                    <span class="individual-service-number" aria-hidden="true">01</span>
+                    <h3>Lawn Maintenance</h3>
+                    <p>Weekly mowing, trimming around beds and pathways, and cleanup of clippings and hard surfaces.</p>
+                    <a href="quote.html?service=Lawn%20Maintenance" class="service-cta">Request a quote →</a>
+                </article>
 
                 <!-- Lawn Installations -->
-                <div style="background: var(--gray-light); padding: 2.5rem; border-radius: 12px;">
-                    <h3 style="font-size: 1.5rem; color: var(--green-dark); margin-bottom: 1rem;">Lawn Installations</h3>
-                    <p style="color: var(--charcoal); line-height: 1.7;">Starting fresh? We'll install a brand new lawn that'll have your neighbors wondering if you laid down carpet. Whether it's sod or seed, we'll get you set up right.</p>
-                </div>
+                <article class="individual-service-card">
+                    <span class="individual-service-number" aria-hidden="true">02</span>
+                    <h3>Lawn Installations</h3>
+                    <p>Start fresh with a new lawn installed with sod or seed based on your property and goals.</p>
+                    <a href="quote.html" class="service-cta">Request a quote →</a>
+                </article>
 
                 <!-- Shrub & Hedge Trimming -->
-                <div style="background: var(--gray-light); padding: 2.5rem; border-radius: 12px;">
-                    <h3 style="font-size: 1.5rem; color: var(--green-dark); margin-bottom: 1rem;">Shrub & Hedge Trimming</h3>
-                    <p style="color: var(--charcoal); line-height: 1.7;">Nobody wants overgrown bushes blocking their windows. We'll keep your shrubs and hedges neat, tidy, and actually adding to your curb appeal instead of hiding it.</p>
-                </div>
+                <article class="individual-service-card">
+                    <span class="individual-service-number" aria-hidden="true">03</span>
+                    <h3>Shrub &amp; Hedge Trimming</h3>
+                    <p>Keep shrubs and hedges neat, controlled, and working with the rest of your landscape.</p>
+                    <a href="quote.html?service=Shrub%20%26%20Hedge%20Trimming" class="service-cta">Request a quote →</a>
+                </article>
 
                 <!-- Spring Cleanups -->
-                <div style="background: var(--gray-light); padding: 2.5rem; border-radius: 12px;">
-                    <h3 style="font-size: 1.5rem; color: var(--green-dark); margin-bottom: 1rem;">Spring Cleanups</h3>
-                    <p style="color: var(--charcoal); line-height: 1.7;">Winter is rough on lawns. We'll clear out all the dead leaves, sticks, and winter debris so your yard is ready to actually look good when the weather finally cooperates.</p>
-                </div>
-
-                <!-- Fall Cleanups -->
-                <div style="background: var(--gray-light); padding: 2.5rem; border-radius: 12px;">
-                    <h3 style="font-size: 1.5rem; color: var(--green-dark); margin-bottom: 1rem;">Fall Cleanups</h3>
-                    <p style="color: var(--charcoal); line-height: 1.7;">We'll remove fallen leaves, branches, and other seasonal debris from your lawn and landscape areas, then haul it away. Fall cleanup typically runs from late October through November or early December, depending on the weather.</p>
-                    <a href="quote.html?service=Fall%20Cleanup" class="service-cta">Request a fall cleanup quote →</a>
-                </div>
+                <article class="individual-service-card">
+                    <span class="individual-service-number" aria-hidden="true">04</span>
+                    <h3>Spring Cleanups</h3>
+                    <p>Clear leaves, sticks, and winter debris so lawn and landscape areas are ready for the growing season.</p>
+                    <a href="quote.html?service=Spring%20Cleanup" class="service-cta">Request a quote →</a>
+                </article>
 
                 <!-- Mulching -->
-                <div style="background: var(--gray-light); padding: 2.5rem; border-radius: 12px;">
-                    <h3 style="font-size: 1.5rem; color: var(--green-dark); margin-bottom: 1rem;">Mulching</h3>
-                    <p style="color: var(--charcoal); line-height: 1.7;">Fresh mulch makes everything look better—it's like the finishing touch that pulls your whole landscape together. Plus it keeps weeds down and your plants happy.</p>
-                </div>
+                <article class="individual-service-card">
+                    <span class="individual-service-number" aria-hidden="true">05</span>
+                    <h3>Mulching</h3>
+                    <p>Refresh landscape beds, help hold soil moisture, and create a clean finished appearance.</p>
+                    <a href="quote.html?service=Mulching" class="service-cta">Request a quote →</a>
+                </article>
 
                 <!-- Aeration -->
-                <div style="background: var(--gray-light); padding: 2.5rem; border-radius: 12px;">
-                    <h3 style="font-size: 1.5rem; color: var(--green-dark); margin-bottom: 1rem;">Aeration</h3>
-                    <p style="color: var(--charcoal); line-height: 1.7;">Your lawn needs to breathe. We'll poke holes in that compacted soil so water, air, and nutrients can actually reach the roots. Think of it as a spa day for your grass.</p>
-                </div>
+                <article class="individual-service-card">
+                    <span class="individual-service-number" aria-hidden="true">06</span>
+                    <h3>Aeration</h3>
+                    <p>Relieve compacted soil so air, water, and nutrients can reach the lawn's root zone more easily.</p>
+                    <a href="quote.html?service=Aeration" class="service-cta">Request a quote →</a>
+                </article>
 
                 <!-- Fertilization -->
-                <div style="background: var(--gray-light); padding: 2.5rem; border-radius: 12px;">
-                    <h3 style="font-size: 1.5rem; color: var(--green-dark); margin-bottom: 1rem;">Fertilization</h3>
-                    <p style="color: var(--charcoal); line-height: 1.7;">Custom fertilization plans to give your lawn exactly what it needs, when it needs it. We're talking thick, green, healthy grass that doesn't quit.</p>
-                </div>
+                <article class="individual-service-card">
+                    <span class="individual-service-number" aria-hidden="true">07</span>
+                    <h3>Fertilization</h3>
+                    <p>Support steady growth and color with a lawn fertilization plan suited to the season.</p>
+                    <a href="quote.html?service=Fertilization" class="service-cta">Request a quote →</a>
+                </article>
 
                 <!-- Weed Control -->
-                <div style="background: var(--gray-light); padding: 2.5rem; border-radius: 12px;">
-                    <h3 style="font-size: 1.5rem; color: var(--green-dark); margin-bottom: 1rem;">Weed Control</h3>
-                    <p style="color: var(--charcoal); line-height: 1.7;">Dandelions, crabgrass, and all those other uninvited guests? We'll show them the door. Comprehensive weed control to keep your lawn looking pristine.</p>
-                </div>
-
-                <!-- Snow Removal -->
-                <div style="background: var(--gray-light); padding: 2.5rem; border-radius: 12px;">
-                    <h3 style="font-size: 1.5rem; color: var(--green-dark); margin-bottom: 1rem;">Snow Removal</h3>
-                    <p style="color: var(--charcoal); line-height: 1.7;">Our seasonal driveway service is scheduled after 2 inches or more of new snowfall. Arrival depends on when the storm starts and ends, accumulation, road conditions, and our route, so we cannot guarantee a specific time. Your quote will confirm whether walkways or deicing are included.</p>
-                </div>
+                <article class="individual-service-card">
+                    <span class="individual-service-number" aria-hidden="true">08</span>
+                    <h3>Weed Control</h3>
+                    <p>Target common lawn weeds as part of a healthier, more consistent lawn-care plan.</p>
+                    <a href="quote.html?service=Weed%20Control" class="service-cta">Request a quote →</a>
+                </article>
 
             </div>
         </div>
     </section>
 
     <!-- Why Choose Our Services -->
-    <section class="services-benefits" style="padding: 6rem 0; background: var(--gray-light);">
+    <section class="services-benefits">
         <div class="container">
             <h2 class="section-title">Why People Stick With Us</h2>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2.5rem; margin-top: 3rem;">
-                <div style="background: white; padding: 2.5rem; border-radius: 12px; display: flex; gap: 1.5rem;">
-                    <div style="font-size: 3rem; flex-shrink: 0;">📅</div>
+            <div class="services-benefits-grid">
+                <article class="services-benefit-card">
+                    <div class="services-benefit-number" aria-hidden="true">01</div>
                     <div>
-                        <h3 style="font-size: 1.4rem; color: var(--green-dark); margin-bottom: 0.5rem;">Consistent Scheduling</h3>
-                        <p style="color: var(--charcoal); line-height: 1.7;">We show up on the same day every week. No guessing games, no "we'll get there when we get there." You can set your watch by us.</p>
+                        <h3>Consistent Scheduling</h3>
+                        <p>Recurring work follows a clear service schedule, with weather adjustments communicated when needed.</p>
                     </div>
-                </div>
+                </article>
 
-                <div style="background: white; padding: 2.5rem; border-radius: 12px; display: flex; gap: 1.5rem;">
-                    <div style="font-size: 3rem; flex-shrink: 0;">🔧</div>
+                <article class="services-benefit-card">
+                    <div class="services-benefit-number" aria-hidden="true">02</div>
                     <div>
-                        <h3 style="font-size: 1.4rem; color: var(--green-dark); margin-bottom: 0.5rem;">Professional Equipment</h3>
-                        <p style="color: var(--charcoal); line-height: 1.7;">We invest in the good stuff—commercial-grade mowers, trimmers, and tools that actually do the job right. Your lawn deserves better than a push mower from 1987.</p>
+                        <h3>Professional Equipment</h3>
+                        <p>Commercial lawn and landscape equipment helps the team work efficiently and leave a clean finish.</p>
                     </div>
-                </div>
+                </article>
 
-                <div style="background: white; padding: 2.5rem; border-radius: 12px; display: flex; gap: 1.5rem;">
-                    <div style="font-size: 3rem; flex-shrink: 0;">💪</div>
+                <article class="services-benefit-card">
+                    <div class="services-benefit-number" aria-hidden="true">03</div>
                     <div>
-                        <h3 style="font-size: 1.4rem; color: var(--green-dark); margin-bottom: 0.5rem;">No Subcontractors</h3>
-                        <p style="color: var(--charcoal); line-height: 1.7;">When you hire us, you get us. Not some random crew we hired last week. Same experienced team, every time.</p>
+                        <h3>Family-Owned Service</h3>
+                        <p>Your property is cared for by a local company with a direct connection to the people it serves.</p>
                     </div>
-                </div>
+                </article>
 
-                <div style="background: white; padding: 2.5rem; border-radius: 12px; display: flex; gap: 1.5rem;">
-                    <div style="font-size: 3rem; flex-shrink: 0;">📱</div>
+                <article class="services-benefit-card">
+                    <div class="services-benefit-number" aria-hidden="true">04</div>
                     <div>
-                        <h3 style="font-size: 1.4rem; color: var(--green-dark); margin-bottom: 0.5rem;">Easy Communication</h3>
-                        <p style="color: var(--charcoal); line-height: 1.7;">Call, text, or email—we're responsive. Have a question or special request? You'll actually get a reply, not radio silence.</p>
+                        <h3>Easy Communication</h3>
+                        <p>Call, text, email, or use the customer portal when you have a question or service request.</p>
                     </div>
-                </div>
+                </article>
 
-                <div style="background: white; padding: 2.5rem; border-radius: 12px; display: flex; gap: 1.5rem;">
-                    <div style="font-size: 3rem; flex-shrink: 0;">✅</div>
+                <article class="services-benefit-card">
+                    <div class="services-benefit-number" aria-hidden="true">05</div>
                     <div>
-                        <h3 style="font-size: 1.4rem; color: var(--green-dark); margin-bottom: 0.5rem;">We Clean Up After Ourselves</h3>
-                        <p style="color: var(--charcoal); line-height: 1.7;">Every edge gets blown off, every clipping gets picked up. We leave your property looking better than we found it—that's the whole point.</p>
+                        <h3>A Clean Finish</h3>
+                        <p>Clippings and debris are cleared from the service area and hard surfaces before the team leaves.</p>
                     </div>
-                </div>
+                </article>
             </div>
         </div>
     </section>
@@ -272,8 +312,6 @@
             <a href="quote.html" class="btn btn-primary btn-lg">Get Your Free Quote</a>
         </div>
     </section>
-
-    <!-- Footer -->
 
     <!-- Footer -->
     <footer class="footer">
