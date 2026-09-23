@@ -696,7 +696,12 @@
             document.querySelectorAll('input[name="service"]').forEach(function(input) {
                 if (input.value.toLowerCase() === requestedService.toLowerCase()) input.checked = true;
             });
-            if (requestedService.toLowerCase() === 'fall cleanup') document.getElementById('quoteSeasonalContext').hidden = false;
+            var seasonalContext = document.getElementById('quoteSeasonalContext');
+            if (requestedService.toLowerCase() === 'fall cleanup') seasonalContext.hidden = false;
+            if (requestedService.toLowerCase() === 'snow removal') {
+                seasonalContext.textContent = 'Snow Removal is selected below. Tell us about your driveway and any walkways or deicing you want quoted.';
+                seasonalContext.hidden = false;
+            }
         }
         var requestedPackage = pageParams.get('package');
         if (requestedPackage) {

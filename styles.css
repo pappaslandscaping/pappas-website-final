@@ -433,6 +433,52 @@ nav.scrolled .logo-img {
     margin-bottom: 1.7rem !important;
 }
 
+.snow-preview {
+    background: var(--green-dark);
+    color: white;
+    padding: 2.75rem 0;
+}
+
+.snow-preview-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.snow-preview-eyebrow {
+    color: #d7e7a3;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.65rem;
+}
+
+.snow-preview h2 {
+    color: white;
+    font-size: clamp(1.65rem, 2.7vw, 2.3rem);
+    margin-bottom: 0.7rem;
+}
+
+.snow-preview-inner > div > p:last-child {
+    max-width: 680px;
+    line-height: 1.65;
+    color: #edf3e6;
+}
+
+.snow-preview-button {
+    background: white;
+    color: var(--green-dark);
+    white-space: nowrap;
+    text-align: center;
+}
+
+.snow-preview-button:hover {
+    background: #f1f6e8;
+    transform: translateY(-2px);
+}
+
 /* Buttons */
 .btn {
     padding: 1.1rem 2.5rem;
@@ -1351,6 +1397,17 @@ nav.scrolled .logo-img {
 
     .fall-feature-copy > p:not(.section-eyebrow) {
         font-size: 1rem;
+    }
+
+    .snow-preview-inner {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .snow-preview-button {
+        white-space: normal;
+        justify-self: center;
     }
 
     .btn {
