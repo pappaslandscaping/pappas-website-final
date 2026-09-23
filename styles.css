@@ -700,6 +700,7 @@ nav.scrolled .logo-img {
 .seasonal-service-photo img {
     display: block;
     width: 100%;
+    height: auto;
     aspect-ratio: 275 / 287;
     object-fit: cover;
     border-radius: 10px;
