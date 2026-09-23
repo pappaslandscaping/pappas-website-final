@@ -152,7 +152,7 @@
   function updateChatMode() {
     var teamChat = !!(liveChat && liveChat.mode === 'human');
     titleEl.textContent = teamChat ? 'Chat with our team' : 'Pappas Assistant';
-    subtitleEl.textContent = teamChat ? 'Replies from our team appear here' : 'Service questions and quote help';
+    subtitleEl.textContent = teamChat ? 'Replies from our team appear here' : 'Quick answers and help from our team';
     actionsEl.hidden = teamChat;
     questionInput.placeholder = teamChat ? 'Message our team...' : 'Ask about our services...';
   }
