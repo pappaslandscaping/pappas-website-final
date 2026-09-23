@@ -1,6 +1,6 @@
 /* Quote Page Specific Styles */
 .quote-section {
-    margin-top: 80px;
+    margin-top: 24px;
     padding: 4rem 0 6rem;
     background: var(--gray-light);
     min-height: 100vh;
@@ -20,6 +20,17 @@
 .quote-header p {
     font-size: 1.2rem;
     color: var(--charcoal);
+}
+
+.quote-header .quote-seasonal-context:not([hidden]) {
+    display: inline-block;
+    margin-top: 1.25rem;
+    padding: 0.75rem 1.1rem;
+    border-radius: 999px;
+    background: #edf3e4;
+    color: var(--green-primary);
+    font-size: 0.98rem;
+    font-weight: 600;
 }
 
 /* Progress Bar */
