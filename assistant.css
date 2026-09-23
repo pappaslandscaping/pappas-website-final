@@ -69,6 +69,9 @@
 .pa-messages { flex: 1; min-height: 0; overflow: auto; padding: 18px 16px 10px; background: #fcfdf9; }
 .pa-message { width: fit-content; max-width: 90%; padding: 10px 12px; margin-bottom: 12px; border-radius: 14px; line-height: 1.45; white-space: pre-wrap; overflow-wrap: anywhere; }
 .pa-bot { border-bottom-left-radius: 3px; background: #edf3e6; }
+.pa-staff { border-bottom-left-radius: 3px; background: #edf3e6; }
+.pa-message-label { display: block; margin-bottom: 3px; font-size: 11px; color: #4b6258; }
+.pa-notice { width: auto; max-width: none; margin: 2px 5px 14px; padding: 6px 8px; border-radius: 0; color: #58685d; background: transparent; font-size: 12px; text-align: center; }
 .pa-user { margin-left: auto; border-bottom-right-radius: 3px; background: var(--pa-green); color: #fff; }
 .pa-pending { opacity: .7; }
 .pa-portal-link { display: inline-block; margin: 0 0 14px 4px; color: #225a42; font-weight: 700; text-decoration: underline; }

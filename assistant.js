@@ -15,7 +15,7 @@
     '</button>',
     '<section class="pa-panel" role="dialog" aria-label="Pappas website assistant" hidden>',
     '  <header class="pa-header">',
-    '    <div><strong>Pappas Assistant</strong><span>Service questions and quote help</span></div>',
+    '    <div><strong class="pa-title">Pappas Assistant</strong><span class="pa-subtitle">Service questions and quote help</span></div>',
     '    <button class="pa-close" type="button" aria-label="Close assistant">×</button>',
     '  </header>',
     '  <div class="pa-chat-view">',
@@ -75,6 +75,9 @@
   var humanForm = root.querySelector('.pa-human-form');
   var humanError = root.querySelector('.pa-human-error');
   var messagesEl = root.querySelector('.pa-messages');
+  var actionsEl = root.querySelector('.pa-actions');
+  var titleEl = root.querySelector('.pa-title');
+  var subtitleEl = root.querySelector('.pa-subtitle');
   var messageForm = root.querySelector('.pa-message-form');
   var questionInput = root.querySelector('#pa-question');
   var leadForm = root.querySelector('.pa-lead-form');
@@ -83,6 +86,7 @@
   var waiting = false;
   var liveChat = null;
   var liveMessageIds = {};
+  var displayedJoinAt = null;
   var loggingWarningShown = false;
   var chatApi = 'https://pappas-quote-backend-production.up.railway.app/api/site-chat';
   try { liveChat = JSON.parse(sessionStorage.getItem('pappasLiveChat') || 'null'); } catch (_) { liveChat = null; }
@@ -131,12 +135,26 @@
     else launcher.focus();
   }
 
-  function addMessage(who, message) {
+  function addMessage(who, message, staffName) {
     var node = document.createElement('div');
     node.className = 'pa-message pa-' + who;
-    node.textContent = message;
+    if (who === 'staff') {
+      var label = document.createElement('strong');
+      label.className = 'pa-message-label';
+      label.textContent = staffName || 'Pappas team';
+      node.appendChild(label);
+    }
+    node.appendChild(document.createTextNode(message));
     messagesEl.appendChild(node);
     messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function updateChatMode() {
+    var teamChat = !!(liveChat && liveChat.mode === 'human');
+    titleEl.textContent = teamChat ? 'Chat with our team' : 'Pappas Assistant';
+    subtitleEl.textContent = teamChat ? 'Replies from our team appear here' : 'Service questions and quote help';
+    actionsEl.hidden = teamChat;
+    questionInput.placeholder = teamChat ? 'Message our team...' : 'Ask about our services...';
   }
 
   async function addAccountHelp() {
@@ -251,25 +269,34 @@
       var data = await response.json();
       if (data.mode === 'human' && liveChat.mode !== 'human') {
         liveChat.mode = 'human';
-        questionInput.placeholder = 'Message our team...';
         saveChat();
-        addMessage('bot', 'A team member has joined this chat. Your next message will go to our team.');
+        updateChatMode();
+        if (!data.joinedAt) addMessage('notice', 'Connected to our team inbox. A team member will reply when available.');
       }
       if (!history.length && data.mode === 'assistant') {
         history = (data.messages || []).filter(function (item) { return item.sender === 'visitor' || item.sender === 'assistant'; }).slice(-8).map(function (item) {
           return { role: item.sender === 'visitor' ? 'user' : 'assistant', content: item.body };
         });
       }
+      var joinPending = !!(data.joinedAt && displayedJoinAt !== data.joinedAt);
+      function showJoin() {
+        addMessage('notice', (data.joinedBy || 'A team member') + ' joined the conversation.');
+        displayedJoinAt = data.joinedAt;
+        joinPending = false;
+      }
       (data.messages || []).forEach(function (item) {
+        if (joinPending && new Date(item.created_at) >= new Date(data.joinedAt)) showJoin();
         if (liveMessageIds[item.id]) return;
         liveMessageIds[item.id] = true;
-        addMessage(item.sender === 'visitor' ? 'user' : 'bot', item.sender === 'staff' ? 'Pappas team: ' + item.body : item.body);
+        addMessage(item.sender === 'visitor' ? 'user' : item.sender === 'staff' ? 'staff' : 'bot', item.body, item.staff_name);
       });
+      if (joinPending) showJoin();
       if (data.status === 'closed' && !liveChat.closed) {
         liveChat.closed = true;
-        addMessage('bot', 'Our team has closed this conversation. You can start another chat if you need anything else.');
+        addMessage('notice', 'Our team has closed this conversation. You can start another chat if you need anything else.');
         sessionStorage.removeItem('pappasLiveChat');
         liveChat = null;
+        updateChatMode();
       }
     } catch (_) { /* A later poll will retry. */ }
   }
@@ -278,7 +305,9 @@
     if (!liveChat || waiting) return;
     waiting = true;
     try {
-      await appendToChat('visitor', message);
+      var saved = await appendToChat('visitor', message);
+      liveMessageIds[saved.id] = true;
+      addMessage('user', message);
       await pollLiveChat();
     } catch (_) { addMessage('bot', 'Your message did not send. Please try again or call (440) 886-7318.'); }
     finally { waiting = false; }
@@ -314,7 +343,7 @@
     var question = questionInput.value.trim();
     if (!question) return;
     questionInput.value = '';
-    if ((!liveChat || liveChat.mode === 'assistant') && /(?:\b(?:talk|speak|chat)\b.*\b(?:person|human|someone|representative|team)\b|\bcustomer service\b|\blive agent\b)/i.test(question)) {
+    if ((!liveChat || liveChat.mode === 'assistant') && /(?:\b(?:talk|speak|chat)\b.*\b(?:person|human|someone|representative|team|Tim)\b|\bcustomer service\b|\blive agent\b)/i.test(question)) {
       showHuman();
       humanForm.elements.message.value = question;
       return;
@@ -353,17 +382,17 @@
       if (handoff) liveChat.mode = 'human';
       else liveChat = { id: data.id, token: data.token, mode: 'human' };
       saveChat();
+      liveMessageIds[data.messageId] = true;
       if (window.PappasAnalytics) {
         window.PappasAnalytics.track(handoff ? 'human_handoff' : 'chat_started', { chat_type: 'human' });
       }
       humanForm.reset();
       showChat();
-      questionInput.placeholder = 'Message our team...';
-      addMessage('bot', data.afterHours
-        ? 'Thanks. We received your message after hours. We’ll reply during business hours and can use the contact information you provided if you close this page.'
-        : (data.alerted || data.alreadyAlerted)
-          ? 'Thanks. We alerted our team and will reply here when someone is available.'
-          : 'Thanks. Your message is in our team inbox. You can keep this chat open for a reply or call (440) 886-7318.');
+      updateChatMode();
+      addMessage('user', payload.message);
+      addMessage('notice', data.afterHours
+        ? 'Message received. Our team will reply during business hours or follow up using the contact information you provided.'
+        : 'Message received. Our team will reply here when available or follow up using the contact information you provided.');
       await pollLiveChat();
     } catch (error) {
       humanError.textContent = error.message === 'chat-unavailable' || error instanceof TypeError
@@ -425,7 +454,8 @@
     }
   });
 
-  addMessage('bot', 'Hi! I can help with services and quote requests. You can also ask to talk to our team. For your schedule or invoices, I’ll point you to the secure customer portal.');
-  if (liveChat) { questionInput.placeholder = 'Message our team...'; pollLiveChat(); }
+  if (!liveChat) addMessage('bot', 'Hi! I can answer questions about our services, help you request a quote, or connect you with our team. For schedules and invoices, use the secure customer portal.');
+  updateChatMode();
+  if (liveChat) pollLiveChat();
   setInterval(pollLiveChat, 5000);
 })();
