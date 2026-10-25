@@ -1,36 +1,159 @@
 /* Quote Page Specific Styles */
 .quote-section {
-    margin-top: 24px;
-    padding: 4rem 0 6rem;
-    background: var(--gray-light);
+    margin-top: 0;
+    padding: 3.5rem 0 6rem;
+    background: #f7f5ef;
     min-height: 100vh;
 }
 
 .quote-header {
     text-align: center;
-    margin-bottom: 3rem;
+    max-width: 780px;
+    margin: 0 auto 2.5rem;
 }
 
 .quote-header h1 {
-    font-size: 3rem;
+    font-size: clamp(2.35rem, 5vw, 3.75rem);
+    line-height: 1.05;
     color: var(--green-dark);
     margin-bottom: 1rem;
 }
 
-.quote-header p {
+.quote-header > p:not(.quote-eyebrow):not(.quote-seasonal-context) {
     font-size: 1.2rem;
     color: var(--charcoal);
+    line-height: 1.65;
+}
+
+.quote-header .quote-eyebrow {
+    margin-bottom: 0.8rem;
+    color: var(--green-primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
 }
 
 .quote-header .quote-seasonal-context:not([hidden]) {
     display: inline-block;
-    margin-top: 1.25rem;
-    padding: 0.75rem 1.1rem;
-    border-radius: 999px;
+    margin-top: 1.4rem;
+    padding: 0.85rem 1.15rem;
+    border: 1px solid #d7e2ca;
+    border-radius: 12px;
     background: #edf3e4;
     color: var(--green-primary);
     font-size: 0.98rem;
     font-weight: 600;
+}
+
+.quote-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 310px;
+    gap: 2rem;
+    align-items: start;
+}
+
+.quote-main {
+    min-width: 0;
+}
+
+.quote-guide {
+    position: sticky;
+    top: 2rem;
+    padding: 2rem;
+    border: 1px solid #dce3dd;
+    border-top: 5px solid var(--green-primary);
+    border-radius: 18px;
+    background: white;
+    box-shadow: 0 12px 32px rgba(31, 44, 42, 0.08);
+}
+
+.quote-guide__eyebrow {
+    margin-bottom: 0.65rem;
+    color: var(--green-primary);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.quote-guide h2 {
+    margin-bottom: 1.5rem;
+    color: var(--green-dark);
+    font-size: 1.65rem;
+    line-height: 1.2;
+}
+
+.quote-guide__list {
+    display: grid;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.quote-guide__list li {
+    position: relative;
+    padding-left: 1.7rem;
+}
+
+.quote-guide__list li::before {
+    content: '✓';
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--green-primary);
+    font-weight: 700;
+}
+
+.quote-guide__list strong,
+.quote-guide__list span,
+.quote-guide__area strong,
+.quote-guide__area span,
+.quote-guide__customer strong,
+.quote-guide__customer span {
+    display: block;
+}
+
+.quote-guide__list strong,
+.quote-guide__area strong,
+.quote-guide__customer strong {
+    margin-bottom: 0.25rem;
+    color: var(--green-dark);
+}
+
+.quote-guide__list span,
+.quote-guide__area span,
+.quote-guide__customer span {
+    color: #52615c;
+    font-size: 0.93rem;
+    line-height: 1.5;
+}
+
+.quote-guide__area,
+.quote-guide__customer {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e1e6e2;
+}
+
+.quote-guide__customer a,
+.quote-guide__contact a {
+    color: var(--green-primary);
+    font-weight: 700;
+}
+
+.quote-guide__customer a {
+    display: inline-block;
+    margin-top: 0.65rem;
+    text-decoration: none;
+}
+
+.quote-guide__contact {
+    margin: 1.5rem 0 0;
+    color: #52615c;
+    font-size: 0.92rem;
+    line-height: 1.5;
 }
 
 /* Progress Bar */
@@ -39,7 +162,7 @@
     align-items: center;
     justify-content: center;
     max-width: 600px;
-    margin: 0 auto 4rem;
+    margin: 0 auto 1.5rem;
     padding: 0 2rem;
 }
 
@@ -103,12 +226,13 @@
 
 /* Quote Form */
 .quote-form {
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: none;
+    margin: 0;
     background: white;
     border-radius: 20px;
-    padding: 3rem;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem;
+    border: 1px solid #e1e6e2;
+    box-shadow: 0 12px 36px rgba(31, 44, 42, 0.08);
 }
 
 .customer-shortcut {
@@ -167,7 +291,12 @@
 }
 
 .form-section {
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
+}
+
+.form-section + .form-section {
+    padding-top: 2.5rem;
+    border-top: 1px solid #e3e8e5;
 }
 
 .form-section h2 {
@@ -218,7 +347,7 @@
 .form-group textarea {
     width: 100%;
     padding: 0.9rem 1.2rem;
-    border: 2px solid var(--gray);
+    border: 1.5px solid #cbd5d0;
     border-radius: 10px;
     font-size: 1rem;
     font-family: 'Outfit', sans-serif;
@@ -241,15 +370,15 @@
 /* Package Cards */
 .packages-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
     margin: 2rem 0;
 }
 
 .package-card {
     border: 3px solid var(--gray-light);
     border-radius: 16px;
-    padding: 2rem;
+    padding: 1.5rem;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
@@ -292,7 +421,7 @@
 }
 
 .package-header h3 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--green-primary);
     margin-bottom: 0.5rem;
 }
@@ -300,16 +429,16 @@
 .package-header p {
     color: var(--gray);
     font-size: 0.95rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .package-features {
     list-style: none;
-    margin: 1.5rem 0;
+    margin: 1rem 0 0;
 }
 
 .package-features li {
-    padding: 0.6rem 0;
+    padding: 0.45rem 0;
     display: flex;
     align-items: center;
     gap: 0.8rem;
@@ -387,7 +516,7 @@
 }
 
 .checkbox-card {
-    border: 2px solid var(--gray);
+    border: 1.5px solid #cbd5d0;
     border-radius: 10px;
     padding: 1rem 1.5rem;
     cursor: pointer;
@@ -630,6 +759,16 @@
     margin-bottom: 2rem;
 }
 
+@media (max-width: 1100px) {
+    .quote-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .quote-guide {
+        position: static;
+    }
+}
+
 /* ============================================
    RESPONSIVE - TABLET (768px and below)
    ============================================ */
@@ -647,8 +786,25 @@
         font-size: 1.8rem;
     }
 
-    .quote-header p {
+    .quote-header > p:not(.quote-eyebrow):not(.quote-seasonal-context) {
         font-size: 1rem;
+    }
+
+    .quote-header .quote-eyebrow {
+        font-size: 0.72rem;
+    }
+
+    .quote-layout {
+        gap: 1.5rem;
+    }
+
+    .quote-guide {
+        padding: 1.5rem;
+        border-radius: 14px;
+    }
+
+    .quote-guide h2 {
+        font-size: 1.4rem;
     }
 
     /* Progress bar */
