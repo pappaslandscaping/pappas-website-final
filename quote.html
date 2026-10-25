@@ -1018,6 +1018,8 @@
     function submitForm(e) {
         e.preventDefault();
 
+        // A disabled button also guards programmatic or repeated submit events.
+        if (document.getElementById('submitBtn').disabled) return;
         if (!validateStep3()) return;
 
         var photoBytes = ['propertyPhoto1', 'propertyPhoto2', 'propertyPhoto3'].reduce(function(total, id) {
@@ -1098,8 +1100,13 @@
 
         function showSubmissionError(error) {
             console.error('Submission error:', error);
-            alert(error.message === 'Security check required'
-                ? 'Please complete the security check before submitting.'
+            if (typeof grecaptcha !== 'undefined' && typeof grecaptcha.reset === 'function') {
+                try { grecaptcha.reset(); } catch (resetError) {
+                    console.warn('Could not reset the security check.', resetError);
+                }
+            }
+            alert(error.message === 'Security check required' || error.message === 'Security check rejected'
+                ? 'Please complete the security check again before submitting.'
                 : 'There was a problem submitting your request. Please try again or call us at (440) 886-7318.');
             submitBtn.disabled = false;
             submitBtn.textContent = 'Submit Quote Request';
@@ -1118,8 +1125,15 @@
 
             return fetch('/', {
                 method: 'POST',
-                body: netlifyData
+                body: netlifyData,
+                redirect: 'manual'
             }).then(function(response) {
+                // Netlify redirects a rejected CAPTCHA back to the form. Do not
+                // treat the resulting page as a saved submission.
+                if (response.redirected || response.type === 'opaqueredirect' ||
+                    (response.status >= 300 && response.status < 400)) {
+                    throw new Error('Security check rejected');
+                }
                 if (!response.ok) throw new Error('Netlify form error: ' + response.status);
             });
         }
