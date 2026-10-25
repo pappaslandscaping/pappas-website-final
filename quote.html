@@ -97,7 +97,7 @@
             </div>
 
             <!-- Multi-Step Form; Netlify captures submissions when the primary API is unavailable. -->
-            <form id="quoteForm" class="quote-form" name="quote-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+            <form id="quoteForm" class="quote-form" name="quote-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true" novalidate>
                 <input type="hidden" name="form-name" value="quote-request">
                 <input type="hidden" name="package" id="selectedPackageValue" value="None">
                 <!-- Declares the combined service list so Netlify includes it in saved submissions and alerts. -->
@@ -498,6 +498,7 @@
 
                     <div class="form-actions">
                         <button type="button" class="btn btn-secondary btn-prev" id="step3Prev">← Back</button>
+                        <div data-netlify-recaptcha="true"></div>
                         <button type="submit" class="btn btn-primary btn-submit" id="submitBtn">Submit Quote Request</button>
                     </div>
                 </div>
@@ -1097,7 +1098,9 @@
 
         function showSubmissionError(error) {
             console.error('Submission error:', error);
-            alert('There was a problem submitting your request. Please try again or call us at (440) 886-7318.');
+            alert(error.message === 'Security check required'
+                ? 'Please complete the security check before submitting.'
+                : 'There was a problem submitting your request. Please try again or call us at (440) 886-7318.');
             submitBtn.disabled = false;
             submitBtn.textContent = 'Submit Quote Request';
         }
@@ -1105,6 +1108,9 @@
         // Netlify Forms is the durable first stop for every request and sends the office alert.
         function submitToNetlify() {
             var netlifyData = new FormData(document.getElementById('quoteForm'));
+            if (!netlifyData.get('g-recaptcha-response')) {
+                return Promise.reject(new Error('Security check required'));
+            }
             netlifyData.set('form-name', 'quote-request');
             Object.keys(formData).forEach(function(key) {
                 if (key !== 'photos') netlifyData.set(key, String(formData[key]));
